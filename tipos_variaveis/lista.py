@@ -26,7 +26,7 @@ minha_lista.insert(2, 10)
 print(f"\nApós o insert (2, 10): {minha_lista}")
 
 #Metodo pop()
-elemento_removido = minha_lista.pop(3)
+elemento_removido = minha_lista.pop(0)
 print(f"\nElemento removido: {elemento_removido}")
 print(f"Após pop(3): {minha_lista}")
 
