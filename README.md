@@ -1,4 +1,4 @@
-<h1>Rocketseat Curso - Python</h1>
+<h1>🚀 Rocketseat Curso - Python</h1>
 
 <h2>Aulas Ministradas por Gabriel Casemiro</h2>
 
