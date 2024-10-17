@@ -1,16 +1,21 @@
-from flask import Flask
+from flask import Flask, request
+from Models.task import Task
+
 
 app = Flask(__name__)
 
-@app.route('/')
+#CRUD
+#CREATE, READ, UPDATE, DELETE
 
-def helloWorld():
-    return 'Hello, World!'
+tasks = []
 
-@app.route('/about')
+@app.route('/tasks', methods=['POST'])
+def create_task():
+    data = request.get_json()
+    print(data)
+    return "test"
 
-def avoute():
-    return 'Sobre'
+
 
 if __name__ == '__main__':
     app.run(debug=True)
