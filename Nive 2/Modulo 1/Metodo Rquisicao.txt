@@ -1,0 +1,21 @@
+Método de requisição
+
+GET
+Recupera a representação atual do estado do cliente
+
+POST
+Utilizado para inserir informções do cliente
+
+PUT
+Atualizar informações do cliente. Precisa atualizar todas as informações
+
+PATCH
+Atualiza informações parciais do cliente
+
+DELETE
+Deleta informações do cliente
+
+HEAD, CONNECT E OPTIONS não utilizados normalmente
+
+
+

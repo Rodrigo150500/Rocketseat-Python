@@ -35,3 +35,5 @@ API REST x API Restful
 
 API REST - Trata-se de uma arquitetura para modelar a comunicação entre sistemas
 Restful - Trata-se de uma API que respeita todas as regras da REST
+
+

@@ -1,0 +1,12 @@
+Código de status de respostas HTTP
+
+100 ~ 199 - Repostas Informativas apenas retornam um respostas mas sem dizer se foram sucedidas ou não
+
+200 ~ 299 - Respostas bem-sucedidas, são operações que mostram que a requisição funcionou
+
+300 ~ 399 - Mensagens de redirecionamento, são mensagens que mostram que houve que aquele site houve um redirecionamento
+
+400 ~ 499 - Respostas de erro do cliente, são erros que mostram que foi realizado por parte do cliente
+
+500 ~ 599 - Respostas de erro do servidor, são erros internos do servidor
+
