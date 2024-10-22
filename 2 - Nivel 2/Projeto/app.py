@@ -33,8 +33,8 @@ def login():
 
         if user and user.password == password:
             login_user(user)
-
-          
+            
+            print(current_user.username.is_authenticated)
             return jsonify({'message':'Usuário credenciado'})
        
 
