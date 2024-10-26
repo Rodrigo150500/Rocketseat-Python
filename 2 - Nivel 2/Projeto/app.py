@@ -3,11 +3,13 @@ from models.user import User
 from database import db
 from flask_login import LoginManager, current_user, login_user, logout_user, login_required
 import os
+import bcrypt
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your_secret_key'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'instance/database.db')
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:admin123@127.0.0.1:3306/flask-crud'
+                                     
 
 db.init_app(app)
 login_manager = LoginManager()
@@ -27,7 +29,8 @@ def login():
     
     if username and password:
         user = User.query.filter_by(username=username).first()
-        if user and user.password == password:
+
+        if user and bcrypt.checkpw(str.encode(password), str.encode(user.password)):
             login_user(user)
             print(current_user.is_authenticated)
             return jsonify({'message':'Usuário credenciado'})
@@ -42,7 +45,6 @@ def logout():
     return jsonify({'message': 'Usuário deslogado com sucesso'})
 
 @app.route('/user', methods=['POST'])
-@login_required
 def create_user():
 
     data = request.json
@@ -51,8 +53,10 @@ def create_user():
     password = data.get('password')
 
     if username and password:
+        hashed_password = bcrypt.hashpw(str.encode(password), bcrypt.gensalt())
 
-        user = User(username = username, password = password)
+
+        user = User(username = username, password = hashed_password, role='user')
         db.session.add(user)
         db.session.commit()
         return jsonify({'message':'Usuário criado com sucesso'})
@@ -78,6 +82,9 @@ def update_user(user_id):
     user = User.query.get(user_id)
     data = request.json
 
+    if user_id != current_user.id and current_user.role != 'admin':
+        return jsonify({'message':'Mudança de senha não autorizada'}), 403
+
     if user and data.get("password"):
         
         user.password = data.get('password')
@@ -94,8 +101,12 @@ def delete_user(user_id):
     
     user = User.query.get(user_id)
 
+
+    if current_user.role != 'admin':
+        return jsonify({'message':'Deleção não autorizada'}), 403
+
     if user_id == current_user.id:
-        return jsonify({'message':f'Deleção não autorizada'}), 403
+        return jsonify({'message':f'Deleção não autorizada!'}), 403
 
     if user:
         db.session.delete(user)
@@ -103,11 +114,6 @@ def delete_user(user_id):
         return jsonify({'message':f'O usuário {user.username} foi deletado com sucesso'})
     
     return jsonify({'message': 'Usuário não encontrado'}), 404
-
-
-@app.route('/hello-world', methods=['GET'])
-def hello_world():
-    return "Hello world"
 
 
 # Cria as tabelas ao iniciar a aplicação
