@@ -2,10 +2,8 @@ from flask import Flask, request, jsonify
 from models.user import User
 from database import db
 from flask_login import LoginManager, current_user, login_user, logout_user, login_required
-import os
 import bcrypt
 
-basedir = os.path.abspath(os.path.dirname(__file__))
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your_secret_key'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:admin123@127.0.0.1:3306/flask-crud'
