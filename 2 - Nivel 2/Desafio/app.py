@@ -32,16 +32,20 @@ def createMeal():
   else:
      return jsonify({'message':'Dados não encontrados'}), 404
 
-
-
-
-
-
-
-#Ler refeição um refeição
-
-
 #Ler todas as refeições
+@app.route('/meal', methods=['GET'])
+def readMeals():
+  
+  meals = Meal.query.all()
+
+  if meals:
+     return jsonify({'message': [meal.to_dict() for meal in meals]})
+  
+  return jsonify({'message': 'Refeições não encontradas'}), 404
+
+#Ler refeição uma refeição
+
+
 
 
 #Editar refeição
