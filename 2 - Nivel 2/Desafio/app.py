@@ -44,16 +44,55 @@ def readMeals():
   return jsonify({'message': 'Refeições não encontradas'}), 404
 
 #Ler refeição uma refeição
+@app.route('/meal/<int:id>', methods=['GET'])
+def readMeal(id):
 
+  meal = Meal.query.get(id)
 
-
+  if meal:
+    return jsonify({'message': meal.to_dict()})
+  
+  return jsonify({'message':f"A refeição com id {id} não foi encontrada"}), 404
 
 #Editar refeição
 
+@app.route('/meal/<int:id>', methods=['PUT'])
+def updateMeal(id):
+
+  data = request.json
+
+  if data:
+    name = data.get('name')
+    description = data.get('description')
+    dateTime = data.get('dateTime')
+    isDiet = data.get('isDiet')
+    
+    meal = Meal.query.get(id)
+
+    meal.name = name
+    meal.description = description
+    meal.dateTime = dateTime
+    meal.isDiet = isDiet
+
+    db.session.commit()
+    
+    return jsonify({'message': 'Refeição atualizada com sucesso'})
+
+
+  return jsonify({'message':'Dados não encontrados'}), 404
+  
 
 #Deletar refeição
+@app.route('/meal/<int:id>', methods = ['DELETE'])
+def deleteMeal(id):
+  meal = Meal.query.get(id)
 
+  if meal:
+    db.session.delete(meal)
+    db.session.commit()
+    return jsonify({"message":"Refeição deletada"})
 
+  return jsonify({"message":f"A refeição com id {id} não foi encontrada"}), 404
 
 
 
