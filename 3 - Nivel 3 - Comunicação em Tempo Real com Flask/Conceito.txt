@@ -1,0 +1,14 @@
+Long Polling
+
+No long polling temos conexões sendo abertas e fechadas a todo momento, causando uma certa demora para responder o cliente pois terá que reabrir a conexão.
+
+Além disso, ela sobrecarrega o servidor pois o cliente sempre está esperando uma resposta
+
+
+Websockets
+
+No websocket por sua vez ele procura manter a conexão aberta em ambas direções mantendo uma baixa latência
+
+================================================================
+
+Os dois são protocolos de comunicação que comunicam o cliente e servidor, porém como vimos o long polling tende a sobrecarregar o servidor com múltiplas conexões enquanto o websocket mantem ela aberta até que seja finalizado
