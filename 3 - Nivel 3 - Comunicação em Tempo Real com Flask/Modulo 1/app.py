@@ -52,7 +52,15 @@ def pix_confimation():
 
 @app.route('/payments/pix/<payment_id>', methods = ['GET'])
 def payment_pix_page(payment_id):
-    return  render_template('payment.html')
+
+    paymentData = Payment.query.get(payment_id)
+
+
+    return render_template('payment.html', 
+                            payment_id = paymentData.id, 
+                            value = paymentData.value,
+                            host = "http://127.0.0.1:5000",
+                            qr_code = paymentData.qr_code)
 
 if __name__ == '__main__':
     app.run(debug=True)
