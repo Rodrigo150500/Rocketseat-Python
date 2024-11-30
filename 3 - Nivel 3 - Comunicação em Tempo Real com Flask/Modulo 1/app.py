@@ -61,6 +61,8 @@ def pix_confimation():
 
     payment.paid = True
     db.session.commit()
+
+    socketio.emit(f'payment-confirmed-{payment.id}')
     return jsonify({"message": "The payment was confirmed"})
 
 
@@ -68,6 +70,12 @@ def pix_confimation():
 def payment_pix_page(payment_id):
 
     paymentData = Payment.query.get(payment_id)
+
+    if paymentData.paid:
+        return render_template('confirmed_payment.html',
+        payment_id= paymentData.id,
+        value= paymentData.value
+        )
 
 
     return render_template('payment.html', 
