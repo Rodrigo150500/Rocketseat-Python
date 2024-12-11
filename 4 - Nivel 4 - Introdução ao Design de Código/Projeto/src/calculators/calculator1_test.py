@@ -3,7 +3,7 @@ from typing import Dict
 from pytest import raises
 
 class MockRequest:
-    def __init__(self, body: Dict):
+    def __init__(self, body: Dict) -> None:
         self.json = body
 
 def test_calc():
@@ -31,4 +31,4 @@ def test_calculate_with_bodu_error():
         calc.calculate(request)
     
     assert str(exception.value) == "body mal formatado!"
-    
+
