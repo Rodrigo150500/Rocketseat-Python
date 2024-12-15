@@ -13,7 +13,7 @@ def test_calc2():
     calculator_2 = Calculator2()
     format_response = calculator_2.calculate(request)
 
-    assert isinstance(format_response, dict)
+    assert isinstance(format_response, dict) #Verificando se o format_response é um dicionário 
     assert format_response =={'data': {'Calculator': 2, 'Result': 0.04}}
 
 def test_body_bad_formated():
