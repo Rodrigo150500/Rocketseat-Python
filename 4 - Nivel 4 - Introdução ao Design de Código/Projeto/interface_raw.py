@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 
 class Notification_Sender(ABC):
+    #Define a regra de criação da classe
 
     @abstractmethod
     def send_notification(self, message: str) -> None:
