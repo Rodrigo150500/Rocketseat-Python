@@ -1,10 +1,9 @@
 from typing import Dict, List
 from flask import request as FlaskRequest
-from src.drivers.interfaces.driver_handle_numpy import Driver_Handle_Numpy
-
+from src.drivers.interfaces.driver_handle_numpy import Driver_Handle_Numpy_Interface
 class Calculator2:
 
-    def __init__(self, driver_handle: Driver_Handle_Numpy) -> None:
+    def __init__(self, driver_handle: Driver_Handle_Numpy_Interface) -> None:
         self.__driver_handle = driver_handle
 
 
