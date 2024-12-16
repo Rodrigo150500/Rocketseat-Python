@@ -1,6 +1,6 @@
 from typing import Dict, List
 from flask import request as FlaskRequest
-from src.drivers.interfaces.driver_handle_numpy import Driver_Handle_Numpy_Interface
+from drivers.interfaces.driver_handle_numpy import Driver_Handle_Numpy_Interface
 class Calculator2:
 
     def __init__(self, driver_handle: Driver_Handle_Numpy_Interface) -> None:
@@ -14,14 +14,11 @@ class Calculator2:
         data_verify = self.__data_verify(data_input)
 
         data_process_result = self.__data_process(data_verify)
-        print()
-        print(data_process_result)
+
         result = self.__format_response(data_process_result)
 
-        print(result)
-
         return result
-
+    
     def __data_verify(self, body: Dict) -> List[float]:
 
         if "numbers" not in body:
