@@ -1,6 +1,8 @@
 from src.drivers.interfaces.driver_handle_numpy import Driver_Handle_Numpy_Interface
 from flask import request as FlaskRequest
 from typing import Dict, List
+from src.errors.http_unprocessable_entity import HttpUnprocessableEntityError
+from src.errors.http_bad_request import HttpBadRequestError
 
 class Calculator3:
 
@@ -23,7 +25,7 @@ class Calculator3:
     def __verify_data(self, body: Dict) -> List[float]:
 
         if 'numbers' not in body:
-            raise Exception("Body mal formatado!")
+            raise HttpUnprocessableEntityError("Body mal formatado!")
 
         response = body['numbers']
 
@@ -42,7 +44,7 @@ class Calculator3:
     def __response_validation(self, variance: float, multiplication: float) -> None:
 
         if variance < multiplication:
-            raise Exception('Variação menor do que a multiplicao!')
+            raise HttpBadRequestError('Variação menor do que a multiplicao!')
 
     def __format_response(self, variance):
         return {
