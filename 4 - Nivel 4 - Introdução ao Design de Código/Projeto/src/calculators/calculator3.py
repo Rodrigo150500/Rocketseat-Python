@@ -1,4 +1,4 @@
-from drivers.interfaces.driver_handle_numpy import Driver_Handle_Numpy_Interface
+from src.drivers.interfaces.driver_handle_numpy import Driver_Handle_Numpy_Interface
 from flask import request as FlaskRequest
 from typing import Dict, List
 
