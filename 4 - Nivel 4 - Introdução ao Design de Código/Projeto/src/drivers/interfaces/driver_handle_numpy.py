@@ -9,4 +9,8 @@ class Driver_Handle_Numpy_Interface(ABC):
 
     @abstractmethod    
     def variance(self, numbers: List[float]) -> float:
-        return self.__np.var(numbers)
+        pass
+    
+    @abstractmethod
+    def mean(self, numbers: List[float]) -> float:
+        pass

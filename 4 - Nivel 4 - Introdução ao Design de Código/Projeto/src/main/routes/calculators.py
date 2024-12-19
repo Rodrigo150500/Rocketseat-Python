@@ -2,7 +2,7 @@ from flask import request, jsonify, Blueprint
 from src.main.factories.calculator2_factory import calculator2_factory
 from src.main.factories.calculator1_factory import calculator1_factory
 from src.main.factories.calculator3_factory import calculator3_factory
-
+from src.main.factories.calculator4_factory import calculator4_factory
 from src.errors.error_controller import handler_error
 
 
@@ -58,3 +58,18 @@ def calculator_3():
         error_response = handler_error(exception)
 
         return jsonify(error_response)
+
+@calc_route_bp.route("/calculator/4", methods=['POST'])
+def calculator_4():
+    try:
+        calc = calculator4_factory()
+
+        response = calc.calculate(request)
+
+        return jsonify(response)
+    
+    except Exception as exeception:
+
+        error_resonse = handler_error(exeception)
+
+        return jsonify(error_resonse)
