@@ -4,7 +4,7 @@
 
 <ul>
     <li>
-        <p>A 1° calculadora deverá realizar:
+        <p>1° calculadora deverá realizar:
         <ul>
             <li>Um número é dividido em 3 partes iguais</li>
             <li>A primeira parte é dividida por 4 e seu resultado somado a 7. Após isso, o resultado é elevado ao quadro e multiplicado por um valor de 0.257</li>
@@ -14,7 +14,7 @@
         </ul>
     </li>
     <li>
-        <p>A 2° calculadora deverá realizar:</p>
+        <p>2° calculadora deverá realizar:</p>
         <ul>
             <li>N numeros são enviados</li>
             <li>Todos esses N números são multiplicados por 11 e elevados a potência de 0.95</li>
@@ -23,7 +23,7 @@
         </ul>
     </li>
     <li>
-        <p>A 3° calculadora deverá realizar:</p>
+        <p>3° calculadora deverá realizar:</p>
         <ul>
             <li>N números são colocados como entrada</li>
             <li>Caso a variância de todos esses números for menos que a multiplicação deles, é apresentado uma informação de sucesso ao usuário</li>
@@ -32,7 +32,7 @@
         </ul>
     </li>
     <li>
-        <p>A 4° calculadora devera realizar:</p>
+        <p>4° calculadora devera realizar:</p>
         <ul>
             <li>N números são colocados como entrada</li>
             <li>Retorne a média desses números</li>
@@ -42,4 +42,4 @@
 
 </ul>
 
-<p>É importante manter as boas práticas de projeto, colocando testes unitários, rotas individuais e tratamentos de erros</p>
+<p>⚠ É importante manter as boas práticas de projeto, colocando testes unitários, rotas individuais e tratamentos de erros</p>
