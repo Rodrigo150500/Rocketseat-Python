@@ -1,0 +1,7 @@
+O - Princípio do Aberto / Fechado (OCP)
+
+"Um artefaro de software deve estar aberto para extensão, mas fechado para modificação."
+
+"Em outras palavras, o comportamento de um artefato de software deve ser extensível, sem ter que modificar esse artefato."
+
+Nesse princípio temos um método dentro de uma classe que não vamos realizar nenhuma modicação, mas o que vai modificar a sua saida será sua entrada.
