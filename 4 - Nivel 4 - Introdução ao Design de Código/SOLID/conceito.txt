@@ -1,0 +1,12 @@
+Introdução
+
+S.O.L.I.D trata-se de um acrônomo onde cada letra possui um significado, são boas práticas voltados a orintação a objetos.
+
+Onde cada letra representa:
+
+S - Princípio da Responsabilidade Única
+O - Princípio Aberto/Fechado
+L - Princípio da Substituição de Liskov
+I - Princípio da Segregação de Interfaces
+D - Princípio da Inversão da Dependência
+

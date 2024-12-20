@@ -1,0 +1,12 @@
+S - Princípio da Responsabilidade (SRP)
+
+"Um módulo deve ter um, e apenas um, motivo para alteração"
+
+Um módulo de ser especializado em um único assunto e possuir apenas uma única responsabilidade dentro do seu software
+
+"Um módulo é apenas um conjunto coeso de funções e estruturas de dados"
+
+O conceito para o Princípio da Responsabilidade Única é a aplicação da separação das funções dentro de uma classe. 
+
+Ao invés de desenvolver as responsabilidades tudo dentro de uma única função, separe em outras funções para facilitar o fluxo de leitura do código
+
