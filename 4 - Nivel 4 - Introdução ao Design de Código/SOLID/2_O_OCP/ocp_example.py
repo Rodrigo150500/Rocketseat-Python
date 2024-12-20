@@ -1,6 +1,6 @@
 #Usando deste método não segue o princípio do aberto/fechado
 class Company:
-    def do_word(self, work: int):
+    def do_word(self, work: int) -> None:
         if(work == 1):
             print("Sellers are raising money")
         elif(work == 2):
@@ -20,7 +20,7 @@ class RH:
         print("HR are hiding")
 
 class SCompany:
-    def do_work(self, work: any):
+    def do_work(self, work: any) -> None:
         work.make()
 
 programmer = Programmer()
