@@ -1,0 +1,7 @@
+D - Princípio da Inverão da Dependência
+
+Módulos de alto nível não devem depender diretamente dos módulos de baixo nível
+
+"O Princípio da Inversão da Dependência (DIP) nos diz que nos sistemas mais flexíveis são aqueles em que as dependências do código-fonte referem-se apenas a abstrações, não a concreções"
+
+A ideia é realizar uma interface para ser herdada em outras classes, essa interface será um intermediário na tipagem no método construtor.
