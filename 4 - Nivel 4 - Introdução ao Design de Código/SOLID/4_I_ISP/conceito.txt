@@ -1,0 +1,7 @@
+I - Princípio de Segregação de Interface
+
+Uma classe não deve ser forçada a implementar interfaces que ela não utilizara
+
+"Em vez disso, as interfaces devem ser segregadas em conjuntos menores e específicaos de métodos."
+
+A ideia da segregação é deixar interfaces específicas para cada uso ao invés de criar uma interface genérica que contenha todos os métodos, pois nem toda aplicação utilizará os mesmos métidos
