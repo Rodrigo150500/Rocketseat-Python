@@ -1,0 +1,35 @@
+Quando foi feito?
+
+O padrão MVC foi introduzido originalmente por Trygve Reenskaug, um engenheiro de software norueguês, em 1978. Ele apresentou o padrão em um artigo chamado "Applications Programming in Smalltalk-90: How to use Model-View-Controller"
+
+O que é?
+
+É uma arquitetura de software amplamanete utilizada para organizar e estruturar o código em sistemas que envolvem interface do usuário e lógica de negócios. Ele separa as responsabilidades em três componentes principais: Model (Modelo), View (Visão) e Controller (Controlador).
+
+Frameworks similiares
+
+O Django trabalha da mesma forma com outro nome:
+
+Django   MVC
+
+Model    -> Model
+View     -> Controller
+Template -> View
+
+Responsabilidades do Padrão MVC
+
+View
+A view é reponsável por apresentar os dados de respostas e por lidar com a interface de interação com o usuário. Ela é responsável por conversar com o usuário através da interface, onde ela receberá os dados
+
+Controller
+O controller recebe entradas do usuário da View, process essa entrada e atualiza o Model conforme o necessário. O Controller armazena a regra de negócio do sistema. Através dessa camada, os dados vindos do usuário é tratado, como uso apenas de números ou letras, apenas caracteres especiais.
+
+Model
+O Model é responsável por armazenar e gerenciar os dados do aplicativo, bem como fornecer métodos para acessar e manipular esses dados. O model não fica apenas em banco de dados, mas podem ser alocados em arquivos CSV ou TXT.
+
+Fluxo dos Dados
+
+Usuario -> View -> Controller -> Model
+
+
+
