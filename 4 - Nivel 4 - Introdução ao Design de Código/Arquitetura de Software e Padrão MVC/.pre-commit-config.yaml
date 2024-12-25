@@ -9,4 +9,5 @@ repos:
         args:
           - "-rn"  # Only display messages
           - "-sn"  # Don't display the score
+          - "--rcfile=.pylintrc"  # Link to your config file
           - "--load-plugins=pylint.extensions.docparams"  # Load an extension
