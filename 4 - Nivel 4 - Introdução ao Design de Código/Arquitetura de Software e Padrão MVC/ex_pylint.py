@@ -3,7 +3,6 @@
 
 def minha_funcao():
     """Alguma coisa sobre o documento"""
-
     print("Minha funcao")
 
 
