@@ -1,7 +1,7 @@
 """Alguma coisa do codigo"""
 
 
-def minha_funcao():
+def minhafuncao():
     """Alguma coisa sobre o documento"""
     print("Minha funcao")
 
