@@ -1,4 +1,3 @@
-"""Alguma coisa do codigo"""
 
 
 def minhafuncao():
