@@ -6,6 +6,7 @@ disable = C0114, #Missing-module-docstring
           W0703, #Catching too general exeception Exceptions
           C0209, #Consider-using-f-string
           E0015, #Unrecognized-option
+          C0303, #Trailing-whitespace
 
 # Analyse import fallback blocks. This can be used to support both Python 2 and
 # 3 compatible code, which means that the block might have code that exists
