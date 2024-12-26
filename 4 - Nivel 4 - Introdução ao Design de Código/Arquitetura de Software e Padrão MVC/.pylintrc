@@ -1,11 +1,11 @@
 ﻿[MAIN]
 
-disable = C0114,
-          C0115,
-          C0116,
-          W0703,
-          C0209,
-          E0015,
+disable = C0114, #Missing-module-docstring
+          C0115, #Missing-class-docstring
+          C0116, #Missing-function-docstring
+          W0703, #Catching too general exeception Exceptions
+          C0209, #Consider-using-f-string
+          E0015, #Unrecognized-option
 
 # Analyse import fallback blocks. This can be used to support both Python 2 and
 # 3 compatible code, which means that the block might have code that exists
