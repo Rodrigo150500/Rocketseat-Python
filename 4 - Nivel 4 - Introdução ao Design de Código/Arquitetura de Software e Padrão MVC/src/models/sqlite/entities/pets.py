@@ -1,6 +1,7 @@
 from sqlalchemy import BIGINT, String, Column
+from ..settings.base import Base
 
-class PetsTable:
+class PetsTable(Base):
 
     __tablename__ = 'pets'
 

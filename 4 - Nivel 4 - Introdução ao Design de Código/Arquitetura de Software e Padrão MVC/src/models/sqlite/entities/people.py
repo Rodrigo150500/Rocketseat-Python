@@ -1,6 +1,7 @@
 from sqlalchemy import BIGINT, String, Column, ForeignKey
+from ..settings.base import Base
 
-class PeopleTable:
+class PeopleTable(Base):
 
     __tablename__ = "people"
 
