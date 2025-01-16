@@ -1,0 +1,41 @@
+#pylint: disable = unused-argument
+
+from .person_find_controller import PersonFindController
+
+class MockPerson:
+    def __init__(self, first_name, last_name, pet_name, pet_type) -> None:
+        self.first_name = first_name
+        self.last_name = last_name
+        self.pet_name = pet_name
+        self.pet_type = pet_type
+
+class MockPersonController:
+    def get_person(self, person_id: int) -> None:
+        return MockPerson(
+            first_name="John",
+            last_name="Doe",
+            pet_name="Felix",
+            pet_type="cat"
+        )
+
+
+def test_find():
+    controller = PersonFindController(MockPersonController())
+
+    response = controller.find(123)
+
+    expect_response = {
+        "data":{
+                "type": "Person",
+                "count": 1,
+                "atributes":{
+                    "first_name":"John",
+                    "last_name": "Doe",
+                    "pet_name": "Felix",
+                    "pet_type": "cat"
+
+                }
+            }
+    }
+
+    assert response == expect_response
