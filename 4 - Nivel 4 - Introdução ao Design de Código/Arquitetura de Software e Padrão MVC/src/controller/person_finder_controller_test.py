@@ -1,6 +1,6 @@
 #pylint: disable = unused-argument
 
-from .person_find_controller import PersonFindController
+from .person_finder_controller import PersonFinderController
 
 class MockPerson:
     def __init__(self, first_name, last_name, pet_name, pet_type) -> None:
@@ -20,7 +20,7 @@ class MockPersonController:
 
 
 def test_find():
-    controller = PersonFindController(MockPersonController())
+    controller = PersonFinderController(MockPersonController())
 
     response = controller.find(123)
 
