@@ -13,7 +13,9 @@ disable = C0114, #Missing-module-docstring
           C0305,
           W0719,
           W0611,
-          E0402
+          E0402,
+          W0311,
+          C0411          
 
 # Analyse import fallback blocks. This can be used to support both Python 2 and
 # 3 compatible code, which means that the block might have code that exists
