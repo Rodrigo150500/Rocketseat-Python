@@ -1,0 +1,10 @@
+- Criar um banco de dados sqlite
+- Alimentar o banco de dados com o DBeaver
+- Configurar sua conexão com o banco de dados
+    - Mostrar o local do banco de dados
+    - Criar o motor para conversar com o banco
+    - Montar a estrutura session para definir as ações que teremos com o banco
+    - Realizar arquivo de teste
+- Realizar a base declarativa para uso de consultas e ações do banco de dados por orientação a objetos
+- Realizar as entities de cada tabela
+    - Espelhar as tabelas do banco de dados em versão python
