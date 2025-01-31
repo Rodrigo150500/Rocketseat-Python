@@ -8,3 +8,14 @@
 - Realizar a base declarativa para uso de consultas e ações do banco de dados por orientação a objetos
 - Realizar as entities de cada tabela
     - Espelhar as tabelas do banco de dados em versão python
+- Criação dos repositórios para ação no banco de dados
+    - Criar a interface do Cliente com os métodos especificados
+    - Criar a interface da Pessoa para ambos os tipos de pessoa
+    - Criar os métodos:
+        - Sacar dinheiro
+        - Ver extrato
+        - Criar usuario
+        - Listar usuarios
+    - Criar os testes para cada usuario
+        - Teste de Integração
+        - Teste Unitário

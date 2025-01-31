@@ -14,7 +14,7 @@ O motivo disso é para vocês também exercitarem o desenvolvimento e a estrutur
 
 <h2>Regras de Aplicação</h2>
 <ul>
-    <li>A aplicação deve estar conectada a um banco de dados <strong>QLite</strong></li>
+    <li>A aplicação deve estar conectada a um banco de dados <strong>SQLite</strong></li>
     <li>O projeto deve conter uma interface <strong>Cliente</strong>, com métodos: Sacar dinheiro e Realizar extrato</li>
     <li>As controllers deve possuir testes unitários para garantir que estão funcionando conforme devem funcionar</li>
     <li>Deverá ser possível: <strong>Criar</strong> e <strong>listar</strong> usuários</li>
@@ -28,7 +28,7 @@ O motivo disso é para vocês também exercitarem o desenvolvimento e a estrutur
 <h2>Conceitos que pode praticar</h2>
 <ul>
     <li>MVC</li>
-    <li>Testes unitários (e quem sabe de integração 👀</li>
+    <li>Testes unitários (e quem sabe de integração 👀)</li>
     <li>Criação e integração com banco de dados</li>
 </ul>
 
@@ -74,3 +74,4 @@ VALUES
 (100000.00, 10, 'Empresa XYZ', '1111-2222', 'contato@empresa.com', 'Categoria A', 50000.00),
 (80000.00, 5, 'Empresa ABC', '3333-4444', 'contato@abc.com', 'Categoria B', 70000.00),
 (120000.00, 8, 'Empresa 123', '5555-6666', 'contato@123.com', 'Categoria C', 90000.00);
+```
