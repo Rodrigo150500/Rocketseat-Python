@@ -7,5 +7,5 @@ class Cliente(ABC):
         pass
 
     @abstractmethod
-    def realizar_extrato(self):
+    def realizar_extrato(self, nome_pessoa_fisica: str) -> float:
         pass
