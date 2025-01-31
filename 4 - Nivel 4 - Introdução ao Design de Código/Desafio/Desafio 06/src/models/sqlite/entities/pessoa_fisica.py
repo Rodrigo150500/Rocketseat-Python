@@ -2,7 +2,7 @@ from src.models.sqlite.settings.base import Base
 from sqlalchemy import Column, BIGINT, String, REAL
 
 
-class PessoaFisica(Base):
+class PessoaFisicaTable(Base):
 
     __tablename__ = "pessoa_fisica"
 
