@@ -1,9 +1,18 @@
 from src.models.sqlite.interface.cliente_interface import Cliente
-from src.models.sqlite.interface.pessoa_Interface import PessoaInterface
+from src.models.sqlite.interface.pessoa_interface import PessoaInterface
 from src.models.sqlite.settings.connection import DBConnectionHandler
-from src.models.sqlite.entities.pessoa_fisica import PessoaFisica
+from src.models.sqlite.entities.pessoa_fisica import PessoaFisicaTable
 from sqlalchemy.orm.exc import NoResultFound
 
+class PessoaInterface:
+    def __init__(self) -> None:
+        self.renda_mensal = float
+        self.idade = int
+        self.nome_completo = str
+        self.celular = str
+        self.email = str
+        self.categoria = str
+        self.saldo = float
 
 class PessoaFisicaRepository(Cliente, PessoaInterface):
     
@@ -20,7 +29,7 @@ class PessoaFisicaRepository(Cliente, PessoaInterface):
         try:
             with self.__db_connection as database:
                 consulta = (database.session
-                            .query(PessoaFisica)
+                            .query(PessoaFisicaTable)
                             .filter_by(nome_completo = nome_pessoa_fisica)
                             .first())
 
@@ -31,8 +40,28 @@ class PessoaFisicaRepository(Cliente, PessoaInterface):
         except NoResultFound as exc:
             raise ValueError("Usuário não encontrado") from exc  # CORRETO
 
-    def criar_usuario(self):
-        pass
+    def criar_usuario(self, user_data: PessoaInterface):
+
+        user_data = PessoaFisicaTable(
+            renda_mensal = user_data.renda_mensal,
+            idade = user_data.idade,
+            nome_completo = user_data.nome_completo,
+            celular = user_data.celular,
+            email = user_data.email,
+            categoria = user_data.categoria,
+            saldo = user_data.saldo
+        )
+
+        try:
+            with self.__db_connection as database:
+                database.session.add(user_data)
+                database.session.commit()
+
+        except Exception as exception:
+            database.session.rollback()
+            raise exception
+
+        
 
     def listar_usuarios(self):
         pass
