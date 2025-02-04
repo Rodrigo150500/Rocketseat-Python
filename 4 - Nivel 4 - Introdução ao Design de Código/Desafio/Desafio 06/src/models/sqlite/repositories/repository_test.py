@@ -47,6 +47,15 @@ def test_listar_usuarios():
     print()
     print(response)
 
+@pytest.mark.skip(reason="Teste de Integração")
+def test_consultar_saldo():
 
+    repo = PessoaFisicaRepository(db_connection_handler)
+
+    saldo = repo.consultar_saldo("Rodrigo")
+
+    print()
+
+    print(saldo)
     
     

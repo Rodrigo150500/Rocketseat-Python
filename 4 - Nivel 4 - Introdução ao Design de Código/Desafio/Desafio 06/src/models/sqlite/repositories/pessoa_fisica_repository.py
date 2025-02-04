@@ -31,6 +31,15 @@ class PessoaFisicaRepository(Cliente, PessoaInterface):
         else:
             pass
 
+    def consultar_saldo(self, nome_pessoa: str) -> float:
+
+        with self.__db_connection as database:
+
+            consulta = database.session.query(PessoaFisicaTable).filter_by(nome_completo = nome_pessoa).first()
+
+            saldo = consulta.saldo
+
+            return saldo
         
 
         
