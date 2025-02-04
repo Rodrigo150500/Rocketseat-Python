@@ -63,5 +63,13 @@ class PessoaFisicaRepository(Cliente, PessoaInterface):
 
         
 
-    def listar_usuarios(self):
-        pass
+    def listar_usuarios(self) -> list[PessoaFisicaTable]:
+        with self.__db_connection as database:
+
+            try:
+                users = database.session.query(PessoaFisicaTable).all()
+
+                return users
+
+            except NoResultFound:
+                return []

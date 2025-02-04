@@ -37,7 +37,15 @@ def test_criar_usuario():
 
     repo.criar_usuario(usuario)
 
-    
+@pytest.mark.skip(reason="Teste de Integração")
+def test_listar_usuarios():
+
+    repo = PessoaFisicaRepository(db_connection_handler)
+
+    response = repo.listar_usuarios()
+
+    print()
+    print(response)
 
 
     
