@@ -35,11 +35,16 @@ class PessoaFisicaRepository(Cliente, PessoaInterface):
 
         with self.__db_connection as database:
 
-            consulta = database.session.query(PessoaFisicaTable).filter_by(nome_completo = nome_pessoa).first()
+            try:
 
-            saldo = consulta.saldo
+                consulta = database.session.query(PessoaFisicaTable).filter_by(nome_completo = nome_pessoa).first()
 
-            return saldo
+                saldo = consulta.saldo
+
+                return saldo
+
+            except NoResultFound:
+                return 0
         
 
         
@@ -64,7 +69,7 @@ class PessoaFisicaRepository(Cliente, PessoaInterface):
         except NoResultFound as exc:
             raise ValueError("Usuário não encontrado") from exc  # CORRETO
 
-    def criar_usuario(self, user_data: PessoaInterface):
+    def criar_usuario(self, user_data: PessoaInterface) -> None:
 
         user_data = PessoaFisicaTable(
             renda_mensal = user_data.renda_mensal,
