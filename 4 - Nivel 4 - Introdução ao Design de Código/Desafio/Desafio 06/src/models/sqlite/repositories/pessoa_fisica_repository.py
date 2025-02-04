@@ -23,13 +23,29 @@ class PessoaFisicaRepository(Cliente, PessoaInterface):
     def sacar_dinheiro(self, nome_pessoa_fisica: str, valor_sacar: float) -> str:
         limite = 5000
 
-        saldo = self.realizar_extrato(nome_pessoa_fisica)
+        saldo = self.consultar_saldo(nome_pessoa_fisica)
 
         if valor_sacar > limite or valor_sacar > saldo:
             
             raise Exception("Saque inválido")
         else:
-            pass
+            
+            valor_sacado = round(saldo - valor_sacar,2)
+
+            with self.__db_connection as database:
+                
+                try:
+                    database.session.query(PessoaFisicaTable).filter_by(nome_completo = "Rodrigo").update(
+                        {"saldo":valor_sacado}
+                    )
+
+                    database.session.commit()
+                    
+                    return f"Valor a sacar: {valor_sacar}\nSaldo na conta: {valor_sacado}"
+
+                except Exception as exception:
+                    database.session.rollback()
+                    raise exception
 
     def consultar_saldo(self, nome_pessoa: str) -> float:
 
@@ -45,9 +61,6 @@ class PessoaFisicaRepository(Cliente, PessoaInterface):
 
             except NoResultFound:
                 return 0
-        
-
-        
         
 
     def realizar_extrato(self, nome_pessoa_fisica: str) -> dict:
