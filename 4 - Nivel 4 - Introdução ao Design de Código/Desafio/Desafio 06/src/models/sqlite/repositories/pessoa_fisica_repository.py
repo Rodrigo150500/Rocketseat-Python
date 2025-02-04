@@ -20,22 +20,37 @@ class PessoaFisicaRepository(Cliente, PessoaInterface):
         self.__db_connection = db_connection
 
 
-    def sacar_dinheiro(self) -> str:
-        pass
+    def sacar_dinheiro(self, nome_pessoa_fisica: str, valor_sacar: float) -> str:
+        limite = 5000
+
+        saldo = self.realizar_extrato(nome_pessoa_fisica)
+
+        if valor_sacar > limite or valor_sacar > saldo:
+            
+            raise Exception("Saque inválido")
+        else:
+            pass
+
+        
+
         
         
 
-    def realizar_extrato(self, nome_pessoa_fisica: str) -> float:
+    def realizar_extrato(self, nome_pessoa_fisica: str) -> dict:
         try:
             with self.__db_connection as database:
-                consulta = (database.session
+                pessoa = (database.session
                             .query(PessoaFisicaTable)
                             .filter_by(nome_completo = nome_pessoa_fisica)
                             .first())
 
-                saldo = consulta.saldo
+                extrato = {
+                    "Nome": pessoa.nome_completo,
+                    "Saldo": pessoa.saldo,
+                    "Categoria": pessoa.categoria
+                }
 
-                return saldo
+                return extrato
 
         except NoResultFound as exc:
             raise ValueError("Usuário não encontrado") from exc  # CORRETO
