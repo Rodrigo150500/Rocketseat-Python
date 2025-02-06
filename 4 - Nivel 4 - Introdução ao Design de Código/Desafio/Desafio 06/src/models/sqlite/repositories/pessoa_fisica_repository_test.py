@@ -2,7 +2,7 @@ from src.models.sqlite.repositories.pessoa_fisica_repository import PessoaFisica
 from mock_alchemy.mocking import UnifiedAlchemyMagicMock
 from unittest import mock
 from src.models.sqlite.entities.pessoa_fisica import PessoaFisicaTable
-
+import pytest
 class MockConnection:
 
     def __init__(self):
@@ -35,7 +35,6 @@ class MockConnection:
 
 
 
-
 def test_listar_usuarios():
     mock_connection = MockConnection()
 
@@ -48,3 +47,18 @@ def test_listar_usuarios():
     mock_connection.session.filter.assert_not_called()
 
     assert response[0].nome_completo == "Diguinho"
+
+def test_sacar_dinheiro():
+
+    mock_connection = MockConnection()
+
+    repo = PessoaFisicaRepository(mock_connection)
+
+    response = repo.sacar_dinheiro("Rodrigo", 15)
+
+    mock_connection.session.query.assert_called_with(PessoaFisicaTable)
+    mock_connection.session.filter_by.assert_called_with(nome_completo = "Rodrigo")
+    mock_connection.session.update.assert_called_once()
+    mock_connection.session.first.assert_called_once()
+
+    assert "Valor" in response

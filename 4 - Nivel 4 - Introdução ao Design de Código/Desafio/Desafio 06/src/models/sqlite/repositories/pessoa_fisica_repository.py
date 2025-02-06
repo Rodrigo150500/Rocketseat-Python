@@ -35,7 +35,7 @@ class PessoaFisicaRepository(Cliente, PessoaInterface):
             with self.__db_connection as database:
                 
                 try:
-                    database.session.query(PessoaFisicaTable).filter_by(nome_completo = "Rodrigo").update(
+                    database.session.query(PessoaFisicaTable).filter_by(nome_completo = nome_pessoa_fisica).update(
                         {"saldo":valor_sacado}
                     )
 
