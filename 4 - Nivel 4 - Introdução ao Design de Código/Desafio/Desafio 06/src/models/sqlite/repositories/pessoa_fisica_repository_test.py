@@ -13,9 +13,9 @@ class MockConnection:
                     [mock.call.query(PessoaFisicaTable)],
                     [PessoaFisicaTable(renda_mensal = 15000, 
                                         idade= 35,
-                                        nome_completo = "Diguinho",
+                                        nome_completo = "Rodrigo",
                                         celular = "(59) 91657-4878",
-                                        email = "Diguinho@gmail.com",
+                                        email = "Rodrigo@gmail.com",
                                         categoria = "Categoria B",
                                         saldo = 15.90),
                     PessoaFisicaTable(renda_mensal = 1674, 
@@ -46,7 +46,8 @@ def test_listar_usuarios():
     mock_connection.session.all.assert_called_once()
     mock_connection.session.filter.assert_not_called()
 
-    assert response[0].nome_completo == "Diguinho"
+    assert response[0].nome_completo == "Rodrigo"
+    assert response[1].nome_completo == "Murilo"
 
 def test_sacar_dinheiro():
 
@@ -62,3 +63,49 @@ def test_sacar_dinheiro():
     mock_connection.session.first.assert_called_once()
 
     assert "Valor" in response
+
+def test_consultar_saldo():
+
+    mock_connection = MockConnection()
+
+    repo = PessoaFisicaRepository(mock_connection)
+
+    response = repo.consultar_saldo("Murilo")
+
+    mock_connection.session.query.assert_called_once_with(PessoaFisicaTable)
+    mock_connection.session.filter_by.assert_called_once_with(nome_completo = "Murilo")
+    mock_connection.session.first.assert_called_once()
+
+
+@pytest.mark.skip()
+def test_realizar_extrato():
+
+    mock_connection = MockConnection()
+
+    repo = PessoaFisicaRepository(mock_connection)
+
+    response = repo.realizar_extrato("Murilo")
+
+    mock_connection.session.query.assert_called_once_with(PessoaFisicaTable)
+    mock_connection.session.filter_by.assert_called_once_with(nome_completo = "Murilo")
+    mock_connection.session.first.assert_called_once()
+    mock_connection.session.all.assert_not_called()
+
+    assert isinstance(response, dict)
+
+
+
+
+"""
+
+Método	Descrição	Exemplo
+assert_called()	                Verifica se foi chamado pelo menos uma vez.	                            mock.method.assert_called()
+assert_called_once()	        Verifica se foi chamado exatamente uma vez.	                            mock.method.assert_called_once()
+assert_called_with(*args)	    Verifica se foi chamado pelo menos uma vez com os argumentos exatos.	mock.method.assert_called_with(10, "teste")
+assert_called_once_with(*args)	Verifica se foi chamado exatamente uma vez com os argumentos exatos.	mock.method.assert_called_once_with(10, "teste")
+assert_not_called()	            Verifica que o método nunca foi chamado.	                            mock.method.assert_not_called()
+assert_any_call(*args)	        Verifica se foi chamado pelo menos uma vez com os argumentos dados.	    mock.method.assert_any_call(10, "teste")
+call_count	                    Retorna o número de vezes que o método foi chamado.	                    assert mock.method.call_count == 2
+mock_calls	                    Lista todas as chamadas feitas ao mock.	                                print(mock.method.mock_calls)
+reset_mock()	                Reseta o histórico de chamadas do mock.	                                mock.method.reset_mock()
+"""
