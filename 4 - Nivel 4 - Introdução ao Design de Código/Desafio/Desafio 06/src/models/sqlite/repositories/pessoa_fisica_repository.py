@@ -82,21 +82,21 @@ class PessoaFisicaRepository(Cliente, PessoaInterface):
         except NoResultFound as exc:
             raise ValueError("Usuário não encontrado") from exc  # CORRETO
 
-    def criar_usuario(self, user_data: PessoaInterface) -> None:
+    def criar_usuario(self, user_data: dict) -> None:
 
-        user_data = PessoaFisicaTable(
-            renda_mensal = user_data.renda_mensal,
-            idade = user_data.idade,
-            nome_completo = user_data.nome_completo,
-            celular = user_data.celular,
-            email = user_data.email,
-            categoria = user_data.categoria,
-            saldo = user_data.saldo
+        user_data_table = PessoaFisicaTable(
+            renda_mensal = user_data["renda_mensal"],
+            idade = user_data["idade"],
+            nome_completo = user_data["nome_completo"],
+            celular = user_data["celular"],
+            email = user_data["email"],
+            categoria = user_data["categoria"],
+            saldo = user_data["saldo"]
         )
 
         try:
             with self.__db_connection as database:
-                database.session.add(user_data)
+                database.session.add(user_data_table)
                 database.session.commit()
 
         except Exception as exception:

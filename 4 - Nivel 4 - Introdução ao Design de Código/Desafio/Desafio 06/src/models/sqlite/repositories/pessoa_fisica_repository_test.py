@@ -33,8 +33,6 @@ class MockConnection:
 
     def __exit__(self, exc_type, exc_val, exc_tb): pass
 
-
-
 def test_listar_usuarios():
     mock_connection = MockConnection()
 
@@ -76,8 +74,6 @@ def test_consultar_saldo():
     mock_connection.session.filter_by.assert_called_once_with(nome_completo = "Murilo")
     mock_connection.session.first.assert_called_once()
 
-
-@pytest.mark.skip()
 def test_realizar_extrato():
 
     mock_connection = MockConnection()
@@ -93,7 +89,46 @@ def test_realizar_extrato():
 
     assert isinstance(response, dict)
 
+    """    
+    assert response == {
+           "Nome": "Murilo",
+            "Saldo": 65.99,
+            "Categoria": "Categoria A"
+    }"""
 
+def test_criar_usuario():
+    
+ 
+    mock_connection = MockConnection()
+
+    repo = PessoaFisicaRepository(mock_connection)
+
+    user = {
+        "renda_mensal": 6500,
+        "idade":56,
+        "nome_completo":"Sasuke Uchiha",
+        "celular":"(99) 6854-6536",
+        "email":"sasuke.uchiha@gmail.com",
+        "categoria":"Categoria C",
+        "saldo" : 9662.05
+    }  
+
+    repo.criar_usuario(user)
+
+    added_user = mock_connection.session.add.call_args[0][0]
+
+    mock_connection.session.add.assert_called_once()
+    mock_connection.session.commit.assert_called_once()
+
+    assert isinstance(added_user, PessoaFisicaTable)
+    
+    assert added_user.renda_mensal == 6500
+    assert added_user.idade == 56
+    assert added_user.nome_completo == "Sasuke Uchiha"
+    assert added_user.celular == "(99) 6854-6536"
+    assert added_user.email == "sasuke.uchiha@gmail.com"
+    assert added_user.categoria == "Categoria C"
+    assert added_user.saldo == 9662.05
 
 
 """
