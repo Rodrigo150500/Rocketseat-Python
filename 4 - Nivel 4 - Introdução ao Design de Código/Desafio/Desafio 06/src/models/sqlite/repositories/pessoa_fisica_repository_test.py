@@ -3,6 +3,8 @@ from mock_alchemy.mocking import UnifiedAlchemyMagicMock
 from unittest import mock
 from src.models.sqlite.entities.pessoa_fisica import PessoaFisicaTable
 import pytest
+from sqlalchemy.orm.exc import NoResultFound
+
 class MockConnection:
 
     def __init__(self):
@@ -33,6 +35,33 @@ class MockConnection:
 
     def __exit__(self, exc_type, exc_val, exc_tb): pass
 
+
+class MockConnectionNoResult:
+
+    def __init__(self) -> None:
+        self.session = UnifiedAlchemyMagicMock()
+        self.session.query.side_effect = self.__raise_exception_no_result
+    
+    def __raise_exception_no_result(self, *args, **kwargs):
+        raise NoResultFound("No result Found")
+    
+    def __enter__(self): return self
+
+    def __exit__(self, exc_type, exc_val, exc_tb): pass
+
+class MockConnectionNoAdd:
+
+    def __init__(self) -> None:
+        self.session = UnifiedAlchemyMagicMock()
+        self.session.add.side_effect = self.__raise_exception_no_adding
+    
+    def __raise_exception_no_adding(self, *args, **kwargs):
+        raise Exception("No adding data")
+    
+    def __enter__(self): return self
+
+    def __exit__(self, exc_type, exc_val, exc_tb): pass
+
 def test_listar_usuarios():
     mock_connection = MockConnection()
 
@@ -46,6 +75,20 @@ def test_listar_usuarios():
 
     assert response[0].nome_completo == "Rodrigo"
     assert response[1].nome_completo == "Murilo"
+
+def test_listar_usuarios_error():
+    mock_connection = MockConnectionNoResult()
+
+    repo = PessoaFisicaRepository(mock_connection)
+
+    response = repo.listar_usuarios()
+
+    mock_connection.session.query.assert_called_once_with(PessoaFisicaTable)
+    mock_connection.session.all.assert_not_called()
+    mock_connection.session.filter.assert_not_called()
+
+    assert response == []
+
 
 def test_sacar_dinheiro():
 
@@ -62,7 +105,54 @@ def test_sacar_dinheiro():
 
     assert "Valor" in response
 
+def test_sacar_dinheiro_error():
+
+    mock_connection = MockConnectionNoResult()
+
+    repo = PessoaFisicaRepository(mock_connection)
+
+
+    with pytest.raises(Exception):
+        repo.sacar_dinheiro("Rodrigo", 15) 
+
+    mock_connection.session.query.assert_called_with(PessoaFisicaTable)
+
+
+    mock_connection.session.filter_by.assert_not_called()
+    mock_connection.session.update.assert_not_called()
+    mock_connection.session.first.assert_not_called()
+    mock_connection.session.commit.assert_not_called()
+
+
+
+
 def test_consultar_saldo():
+
+    mock_connection = MockConnection()
+
+    repo = PessoaFisicaRepository(mock_connection)
+
+    response = repo.consultar_saldo("Murilo")
+
+    mock_connection.session.query.assert_called_once_with(PessoaFisicaTable)
+    mock_connection.session.filter_by.assert_called_once_with(nome_completo = "Murilo")
+    mock_connection.session.first.assert_called_once()
+
+def test_consultar_saldo_error():
+
+    mock_connection = MockConnectionNoResult()
+
+    repo = PessoaFisicaRepository(mock_connection)
+
+    response = repo.consultar_saldo("Murilo")
+
+    mock_connection.session.query.assert_called_once_with(PessoaFisicaTable)
+    mock_connection.session.filter_by.assert_not_called(nome_completo = "Murilo")
+    mock_connection.session.first.assert_not_called()
+
+    assert response == 0
+
+def test_consultar_saldo_error():
 
     mock_connection = MockConnection()
 
@@ -89,12 +179,21 @@ def test_realizar_extrato():
 
     assert isinstance(response, dict)
 
-    """    
-    assert response == {
-           "Nome": "Murilo",
-            "Saldo": 65.99,
-            "Categoria": "Categoria A"
-    }"""
+def test_realizar_extrato_error():
+
+    mock_connection = MockConnectionNoResult()
+
+    repo = PessoaFisicaRepository(mock_connection)
+
+    with pytest.raises(Exception):
+        response = repo.realizar_extrato("Murilo")
+
+    mock_connection.session.query.assert_called_once_with(PessoaFisicaTable)
+    mock_connection.session.filter_by.assert_not_called()
+    mock_connection.session.first.assert_not_called()
+    mock_connection.session.all.assert_not_called()
+
+
 
 def test_criar_usuario():
     
@@ -129,6 +228,33 @@ def test_criar_usuario():
     assert added_user.email == "sasuke.uchiha@gmail.com"
     assert added_user.categoria == "Categoria C"
     assert added_user.saldo == 9662.05
+
+def test_criar_usuario_error():   
+ 
+    mock_connection = MockConnectionNoAdd()
+
+    repo = PessoaFisicaRepository(mock_connection)
+
+    user = {
+        "renda_mensal": 6500,
+        "idade":56,
+        "nome_completo":"Sasuke Uchiha",
+        "celular":"(99) 6854-6536",
+        "email":"sasuke.uchiha@gmail.com",
+        "categoria":"Categoria C",
+        "saldo" : 9662.05
+    }  
+
+
+    with pytest.raises(Exception):
+        repo.criar_usuario(user)
+    
+    mock_connection.session.add.assert_called_once()
+    mock_connection.session.rollback.assert_called_once()
+    mock_connection.session.commit.assert_not_called()
+
+    
+    
 
 
 """
