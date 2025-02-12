@@ -1,0 +1,24 @@
+JWT - Json Web Token
+
+É um padrão da internet para a criação de dados com criptografia cuja carga também é JSON.
+
+Transformar esses dados em criptografia
+{
+"name": "John Doe",
+"iat": 154687,
+"sub": "165132198"
+}
+
+sdafd5as1das8dsa651das3d1sa231das6d51364e654fdsfasdsa.d.dsadçsadfafds.sf4e8bvcn8f6gn
+
+Funcionalidade
+
+É uma forma de autenticação que permite que um servidor verifique a identidade de um usuário sem precisar armazenar informações sobre ele
+
+Autenticação
+
+*Chave - Cria uma assinatura criptográfica. Garante que o token não foi alterado após sua criação
+
+*Algoritmo - Específica qual algoritmo criptográfico será utlizado para assinar o token (HS256, RS256, ES256)
+
+*Payload - Conteúdo criptografado
