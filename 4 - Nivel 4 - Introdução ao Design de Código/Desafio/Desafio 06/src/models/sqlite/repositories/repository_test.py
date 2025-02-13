@@ -2,6 +2,8 @@ import pytest
 from .pessoa_fisica_repository import PessoaFisicaRepository
 from src.models.sqlite.settings.connection import db_connection_handler
 
+from src.models.sqlite.repositories.pessoa_juridica import PessoaJuridicaRepository
+
 db_connection_handler.connect_to_db()
 
 class PessoaFisica:
@@ -17,7 +19,7 @@ class PessoaFisica:
 
 
 @pytest.mark.skip(reason="Teste de Integração")
-def test_realizar_extrato():
+def test_realizar_extrato_fisico():
     nome = "João da Silva"
     
     repo = PessoaFisicaRepository(db_connection_handler)
@@ -29,7 +31,7 @@ def test_realizar_extrato():
     print(response)
 
 @pytest.mark.skip(reason="Teste de Integração")
-def test_criar_usuario():
+def test_criar_usuario_fisico():
 
     usuario = PessoaFisica(1920,15,"Jorge Silva Campo", "(55) 95154-8942", "Jorge.Silva@gmail.com", "Categoria A", 1500)
 
@@ -38,7 +40,7 @@ def test_criar_usuario():
     repo.criar_usuario(usuario)
 
 @pytest.mark.skip(reason="Teste de Integração")
-def test_listar_usuarios():
+def test_listar_usuarios_fisico():
 
     repo = PessoaFisicaRepository(db_connection_handler)
 
@@ -50,7 +52,7 @@ def test_listar_usuarios():
 
     
 @pytest.mark.skip(reason="Teste de Integração")
-def test_sacar_dinheiro():
+def test_sacar_dinheiro_fisico():
 
     repo = PessoaFisicaRepository(db_connection_handler)
 
@@ -60,7 +62,7 @@ def test_sacar_dinheiro():
     print(saldo)
 
 @pytest.mark.skip(reason="Teste de Integração")
-def test_consultar_saldo():
+def test_consultar_saldo_fisico():
 
     repo = PessoaFisicaRepository(db_connection_handler)
 
@@ -69,3 +71,29 @@ def test_consultar_saldo():
     print()
 
     print(saldo)
+
+@pytest.mark.skip(reason="Teste de Integração")
+def test_consultar_saldo_juridico():
+
+    repo = PessoaJuridicaRepository(db_connection_handler)
+
+    empresa = "Empresa XYZ"
+
+    response = repo.consultar_saldo(empresa)
+
+    assert isinstance(response, float)
+
+    assert response == 50000
+
+@pytest.mark.skip(reason="Teste de Integração")
+def test_sacar_dinheiro_juridico():
+
+    repo = PessoaJuridicaRepository(db_connection_handler)
+
+    empresa = "Empresa XYZ"
+
+    saque = 10000
+
+    response = repo.sacar_dinheiro(empresa, saque)
+
+    print(response)

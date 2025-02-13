@@ -4,7 +4,7 @@ from src.models.sqlite.settings.connection import DBConnectionHandler
 from src.models.sqlite.entities.pessoa_fisica import PessoaFisicaTable
 from sqlalchemy.orm.exc import NoResultFound
 
-class PessoaInterface:
+class PessoaInterfaceLocal:
     def __init__(self) -> None:
         self.renda_mensal = float
         self.idade = int
@@ -82,17 +82,17 @@ class PessoaFisicaRepository(Cliente, PessoaInterface):
         except NoResultFound as exc:
             raise ValueError("Usuário não encontrado") from exc  # CORRETO
 
-    def criar_usuario(self, user_data: dict) -> None:
+    def criar_usuario(self, user_data: PessoaInterfaceLocal) -> None:
 
         user_data_table = PessoaFisicaTable(
-            renda_mensal = user_data["renda_mensal"],
-            idade = user_data["idade"],
-            nome_completo = user_data["nome_completo"],
-            celular = user_data["celular"],
-            email = user_data["email"],
-            categoria = user_data["categoria"],
-            saldo = user_data["saldo"]
-        )
+            renda_mensal = user_data.renda_mensal,
+            idade = user_data.idade,
+            nome_completo = user_data.nome_completo,
+            celular = user_data.celular,
+            email = user_data.email,
+            categoria = user_data.categoria,
+            saldo = user_data.saldo
+        )        
 
         try:
             with self.__db_connection as database:
