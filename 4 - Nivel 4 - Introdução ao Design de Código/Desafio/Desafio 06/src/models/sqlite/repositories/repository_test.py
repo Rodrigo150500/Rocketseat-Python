@@ -17,6 +17,18 @@ class PessoaFisica:
         self.categoria = categoria
         self.saldo = saldo
 
+class PessoaJuridica:
+    
+    def __init__(self, faturamento: float, idade: int, nome_fantasia: str, celular: str, email_corporativo: str, categoria: str, saldo: float) -> None:
+            
+        self.faturamento = faturamento
+        self.idade = idade
+        self.nome_fantasia = nome_fantasia
+        self.celular = celular
+        self.email_corporativo = email_corporativo
+        self.categoria = categoria
+        self.saldo = saldo
+
 
 @pytest.mark.skip(reason="Teste de Integração")
 def test_realizar_extrato_fisico():
@@ -97,3 +109,37 @@ def test_sacar_dinheiro_juridico():
     response = repo.sacar_dinheiro(empresa, saque)
 
     print(response)
+
+@pytest.mark.skip(reason="Teste de Integração")
+def test_listar_usuarios_juridico():
+
+    repo = PessoaJuridicaRepository(db_connection_handler)
+
+    response = repo.listar_usuarios()
+
+    assert isinstance(response, list)
+
+@pytest.mark.skip(reason="Teste de Integração")
+def test_criar_usuario_juridico():
+
+    repo = PessoaJuridicaRepository(db_connection_handler)
+
+    user = PessoaJuridica(
+        15956.66, 18, "Emanoel Company", "(55) 11 99965-6589", "Emanoel.company@company.com", "Categoria SS", 15.96
+    )
+
+    repo.criar_usuario(user)
+
+@pytest.mark.skip(reason="Teste de Integração")
+def test_realizar_extrato_juridico():
+
+    empresa = "Emanoel Company"
+
+    repo = PessoaJuridicaRepository(db_connection_handler)
+
+    response = repo.realizar_extrato(empresa)
+
+    assert isinstance(response, dict)
+    assert response["Nome"] == "Emanoel Company"
+    assert response["Saldo"] == 15.96
+    assert response["Categoria"] == "Categoria SS"

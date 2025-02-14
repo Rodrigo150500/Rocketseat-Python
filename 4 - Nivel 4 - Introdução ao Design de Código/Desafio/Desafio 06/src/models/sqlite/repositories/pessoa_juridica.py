@@ -6,6 +6,18 @@ from src.models.sqlite.interface.pessoa_interface import PessoaInterface
 
 from src.models.sqlite.entities.pessoa_juridica import PessoaJuridicaTable
 
+class PessoaJuridicaLocal:
+    
+    def __init__(self) -> None:
+            
+        self.faturamento = float
+        self.idade = int
+        self.nome_fantasia = str
+        self.celular = str
+        self.email_corporativo = str
+        self.categoria = str
+        self.saldo = float
+
 class PessoaJuridicaRepository(Cliente, PessoaInterface):
 
     def __init__(self, db_connection: DBConnectionHandler) -> None:
@@ -50,12 +62,50 @@ class PessoaJuridicaRepository(Cliente, PessoaInterface):
 
 
     def realizar_extrato(self, nome_pessoa_juridica: str) -> dict:
-        pass
 
-    def criar_usuario(self, user_data: dict) -> None:
-        pass
+        with self.__db_connection as database:
+            user = database.session.query(PessoaJuridicaTable).filter_by(nome_fantasia = nome_pessoa_juridica).first()
+
+        extrato = {
+                    "Nome": user.nome_fantasia,
+                    "Saldo": user.saldo,
+                    "Categoria": user.categoria
+                }
+        return extrato
+
+    def criar_usuario(self, user: PessoaJuridicaLocal) -> None:
+        user = PessoaJuridicaTable(
+            faturamento = user.faturamento,
+            idade = user.idade,
+            nome_fantasia = user.nome_fantasia,
+            celular = user.celular,
+            email_corporativo = user.email_corporativo,
+            categoria = user.categoria,
+            saldo = user.saldo
+        )
+
+        with self.__db_connection as database:
+            
+            try:
+
+                database.session.add(user)
+                database.session.commit()
+            
+            except Exception as exception:
+                database.session.rollback()
+                raise exception
 
     def listar_usuarios(self) -> list[PessoaJuridicaTable]:
-        pass
+        
+        with self.__db_connection as database:
+            
+            try:
+                users = database.session.query(PessoaJuridicaTable).all()
+
+                return users
+            
+            except NoResultFound:
+
+                return []
 
 
