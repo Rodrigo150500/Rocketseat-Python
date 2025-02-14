@@ -62,6 +62,16 @@ class MockConnectionNoAdd:
 
     def __exit__(self, exc_type, exc_val, exc_tb): pass
 
+class PessoaInterfaceLocal:
+    def __init__(self, renda_mensal: float, idade: int, nome_completo: str, celular: str, email: str, categoria: str, saldo: float) -> None:
+        self.renda_mensal = renda_mensal
+        self.idade = idade
+        self.nome_completo = nome_completo
+        self.celular = celular
+        self.email = email
+        self.categoria = categoria
+        self.saldo = saldo
+
 def test_listar_usuarios():
     mock_connection = MockConnection()
 
@@ -202,15 +212,15 @@ def test_criar_usuario():
 
     repo = PessoaFisicaRepository(mock_connection)
 
-    user = {
-        "renda_mensal": 6500,
-        "idade":56,
-        "nome_completo":"Sasuke Uchiha",
-        "celular":"(99) 6854-6536",
-        "email":"sasuke.uchiha@gmail.com",
-        "categoria":"Categoria C",
-        "saldo" : 9662.05
-    }  
+    user = PessoaInterfaceLocal(
+        renda_mensal = 6500,
+        idade = 56,
+        nome_completo = "Sasuke Uchiha",
+        celular = "(99) 6854-6536",
+        email = "sasuke.uchiha@gmail.com",
+        categoria = "Categoria C",
+        saldo = 9662.05
+    )
 
     repo.criar_usuario(user)
 
@@ -235,15 +245,15 @@ def test_criar_usuario_error():
 
     repo = PessoaFisicaRepository(mock_connection)
 
-    user = {
-        "renda_mensal": 6500,
-        "idade":56,
-        "nome_completo":"Sasuke Uchiha",
-        "celular":"(99) 6854-6536",
-        "email":"sasuke.uchiha@gmail.com",
-        "categoria":"Categoria C",
-        "saldo" : 9662.05
-    }  
+    user = PessoaInterfaceLocal(
+        renda_mensal = 6500,
+        idade = 56,
+        nome_completo = "Sasuke Uchiha",
+        celular = "(99) 6854-6536",
+        email = "sasuke.uchiha@gmail.com",
+        categoria = "Categoria C",
+        saldo = 9662.05
+    )
 
 
     with pytest.raises(Exception):

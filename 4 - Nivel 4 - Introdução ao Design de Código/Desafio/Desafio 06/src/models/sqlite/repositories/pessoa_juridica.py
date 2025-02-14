@@ -29,10 +29,10 @@ class PessoaJuridicaRepository(Cliente, PessoaInterface):
         saldo = self.consultar_saldo(nome_pessoa_juridica)
 
         if saldo <= valor_sacar or valor_sacar >= valor_limite:
-            return "Saque inválido"
+            raise Exception("Saque inválido")
         else:
 
-            saldo -= valor_sacar
+            saldo -= round(valor_sacar,2)
 
             with self.__db_connection as database:
 
@@ -43,8 +43,8 @@ class PessoaJuridicaRepository(Cliente, PessoaInterface):
                 )
 
                 database.session.commit()
-            
-            return f"Saque realizado com sucesso. Saldo disponível R${saldo}"
+
+            return f"Valor a sacar: {valor_sacar}\nSaldo na conta: {saldo}"            
 
     def consultar_saldo(self, nome_pessoa_juridica: str) -> float:
         
