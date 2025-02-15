@@ -2,6 +2,7 @@ from .pessoa_juridica import PessoaJuridicaRepository
 from mock_alchemy.mocking import UnifiedAlchemyMagicMock
 from unittest import mock
 from src.models.sqlite.entities.pessoa_juridica import PessoaJuridicaTable
+from src.models.sqlite.interface.pessoa_juridica_atributos_interface import PessoaJuridicaAtributosInterface
 
 class MockConnection:
 
@@ -36,17 +37,7 @@ class MockConnection:
 
     def __exit__(self, exc_type, exc_val, exc_tb): pass
 
-class PessoaJuridicaLocal:
-    
-    def __init__(self, faturamento: float, idade: int, nome_fantasia: str, celular: str, email_corporativo: str, categoria: str, saldo: float) -> None:
-            
-        self.faturamento = faturamento
-        self.idade = idade
-        self.nome_fantasia = nome_fantasia
-        self.celular = celular
-        self.email_corporativo = email_corporativo
-        self.categoria = categoria
-        self.saldo = saldo
+
 
 def test_sacar_dinheiro():
 
@@ -104,16 +95,17 @@ def test_criar_usuario():
 
     repo = PessoaJuridicaRepository(mock_connection)
 
-    user = PessoaJuridicaLocal(
-        159568,
-        22,
-        "Jesus Amado",
-        "(99) 54 95689-5487",
-        "Jesus@gmail.com",
-        "Categoria SSS",
-        99999
+    user = PessoaJuridicaAtributosInterface(
+        faturamento= 159568,
+        idade = 22,
+        nome_fantasia = "Jesus Amado",
+        celular= "(99) 54 95689-5487",
+        email_corporativo= "Jesus@gmail.com",
+        categoria= "Categoria SSS",
+        saldo= 99999
         )
 
+        
     repo.criar_usuario(user)
 
     mock_connection.session.add.assert_called_once()
