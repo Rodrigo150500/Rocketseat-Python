@@ -1,4 +1,4 @@
-from .pessoa_juridica import PessoaJuridicaRepository
+from .pessoa_juridica_repository import PessoaJuridicaRepository
 from mock_alchemy.mocking import UnifiedAlchemyMagicMock
 from unittest import mock
 from src.models.sqlite.entities.pessoa_juridica import PessoaJuridicaTable
@@ -53,8 +53,11 @@ def test_sacar_dinheiro():
     mock_connection.session.update.assert_called_once()
     mock_connection.session.all.assert_not_called()
 
+    assert isinstance(response, dict)
+
+    #assert response["Saque"] == 20
+
     
-    assert "Valor" in response
 
 def test_consultar_saldo():
 

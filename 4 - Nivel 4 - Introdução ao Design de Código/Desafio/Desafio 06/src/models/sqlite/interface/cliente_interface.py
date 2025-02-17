@@ -3,9 +3,9 @@ from abc import ABC, abstractmethod
 class Cliente(ABC):
 
     @abstractmethod
-    def sacar_dinheiro(self):
+    def sacar_dinheiro(self, nome_pessoa: str, valor_sacar: float) -> dict:
         pass
 
     @abstractmethod
-    def realizar_extrato(self, nome_pessoa_fisica: str) -> float:
+    def realizar_extrato(self, nome_pessoa: str) -> float:
         pass

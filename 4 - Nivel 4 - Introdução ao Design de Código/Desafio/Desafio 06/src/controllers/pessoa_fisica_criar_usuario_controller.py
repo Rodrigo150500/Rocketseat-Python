@@ -2,10 +2,10 @@ import re
 from src.models.sqlite.interface.cliente_interface import Cliente
 from src.models.sqlite.interface.pessoa_interface import PessoaInterface
 from src.models.sqlite.interface.pessoa_fisica_atributos_interface import PessoaFisicaInterface
+from .interfaces.pessoa_fisica_criar_usuario_controller_interface import PessoaFisicaCriarUsuarioInterface
 
 
-
-class PessoaFisicaCriarUsuarioController():
+class PessoaFisicaCriarUsuarioController(PessoaFisicaCriarUsuarioInterface):
 
     def __init__(self, pessoa_fisica_repository: Cliente | PessoaInterface) -> None:
         self.__pessoa_fisica_repository = pessoa_fisica_repository
@@ -31,7 +31,7 @@ class PessoaFisicaCriarUsuarioController():
 
     def __validate_name(self, nome_completo: str) -> None:
 
-        caracters_non_valid = re.compile(r"[^a-zA-Z]")
+        caracters_non_valid = re.compile(r"[^a-zA-Z ]")
 
         if caracters_non_valid.search(nome_completo):
             raise Exception("Caracteres inválidos")
@@ -63,6 +63,7 @@ class PessoaFisicaCriarUsuarioController():
             "data":{
                 "type": "Pessoa Fisica",
                 "count": 1,
-                "Atributes": person_info
+                "operation": "Criar Usuario",
+                "atributes": person_info
             }
         }

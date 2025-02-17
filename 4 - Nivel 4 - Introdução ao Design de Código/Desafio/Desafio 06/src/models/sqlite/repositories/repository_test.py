@@ -2,7 +2,7 @@ import pytest
 from .pessoa_fisica_repository import PessoaFisicaRepository
 from src.models.sqlite.settings.connection import db_connection_handler
 
-from src.models.sqlite.repositories.pessoa_juridica import PessoaJuridicaRepository
+from src.models.sqlite.repositories.pessoa_juridica_repository import PessoaJuridicaRepository
 
 db_connection_handler.connect_to_db()
 

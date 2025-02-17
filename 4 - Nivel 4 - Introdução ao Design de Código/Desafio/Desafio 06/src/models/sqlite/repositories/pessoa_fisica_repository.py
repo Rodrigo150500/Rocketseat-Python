@@ -1,18 +1,12 @@
 from src.models.sqlite.interface.cliente_interface import Cliente
 from src.models.sqlite.interface.pessoa_interface import PessoaInterface
+from src.models.sqlite.interface.pessoa_fisica_atributos_interface import PessoaFisicaInterface
 from src.models.sqlite.settings.connection import DBConnectionHandler
 from src.models.sqlite.entities.pessoa_fisica import PessoaFisicaTable
 from sqlalchemy.orm.exc import NoResultFound
 
-class PessoaInterfaceLocal:
-    def __init__(self) -> None:
-        self.renda_mensal = float
-        self.idade = int
-        self.nome_completo = str
-        self.celular = str
-        self.email = str
-        self.categoria = str
-        self.saldo = float
+
+
 
 class PessoaFisicaRepository(Cliente, PessoaInterface):
     
@@ -20,7 +14,7 @@ class PessoaFisicaRepository(Cliente, PessoaInterface):
         self.__db_connection = db_connection
 
 
-    def sacar_dinheiro(self, nome_pessoa_fisica: str, valor_sacar: float) -> str:
+    def sacar_dinheiro(self, nome_pessoa_fisica: str, valor_sacar: float) -> dict:
         limite = 5000
 
         saldo = self.consultar_saldo(nome_pessoa_fisica)
@@ -30,18 +24,23 @@ class PessoaFisicaRepository(Cliente, PessoaInterface):
             raise Exception("Saque inválido")
         else:
             
-            valor_sacado = round(saldo - valor_sacar,2)
+            saldo_remanescente = round(saldo - valor_sacar,2)
 
             with self.__db_connection as database:
                 
                 try:
                     database.session.query(PessoaFisicaTable).filter_by(nome_completo = nome_pessoa_fisica).update(
-                        {"saldo":valor_sacado}
+                        {"saldo":saldo_remanescente}
                     )
 
                     database.session.commit()
+
+                    return {
+                        "Nome": nome_pessoa_fisica,
+                        "Saque": valor_sacar,
+                        "Saldo": saldo_remanescente
+                    }
                     
-                    return f"Valor a sacar: {valor_sacar}\nSaldo na conta: {valor_sacado}"
 
                 except Exception as exception:
                     database.session.rollback()
@@ -82,7 +81,7 @@ class PessoaFisicaRepository(Cliente, PessoaInterface):
         except NoResultFound as exc:
             raise ValueError("Usuário não encontrado") from exc  # CORRETO
 
-    def criar_usuario(self, user_data: PessoaInterfaceLocal) -> None:
+    def criar_usuario(self, user_data: PessoaFisicaInterface) -> None:
 
         user_data_table = PessoaFisicaTable(
             renda_mensal = user_data.renda_mensal,
@@ -104,7 +103,6 @@ class PessoaFisicaRepository(Cliente, PessoaInterface):
             raise exception
 
         
-
     def listar_usuarios(self) -> list[PessoaFisicaTable]:
         with self.__db_connection as database:
 

@@ -105,7 +105,9 @@ def test_sacar_dinheiro():
     mock_connection.session.update.assert_called_once()
     mock_connection.session.first.assert_called_once()
 
-    assert "Valor" in response
+    assert isinstance(response, dict)
+
+    print(response)
 
 def test_sacar_dinheiro_error():
 
