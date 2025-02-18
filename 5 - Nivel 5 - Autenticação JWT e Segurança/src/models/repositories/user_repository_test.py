@@ -1,45 +1,67 @@
-import pytest
 from .user_repository import UserRepository
-from src.models.settings.db_connecting_handler import db_connection_handler
+from unittest.mock import Mock
 
-@pytest.mark.skip(reason="Teste de Integração")
+
+class MockCursor:
+    def __init__(self) -> None:
+        self.execute = Mock()
+        self.fetchone = Mock()
+
+class MockConnection:
+    def __init__(self) -> None:
+        self.cursor = Mock(return_value=MockCursor())
+        self.commit = Mock()
+
 def test_registry_user():
-    db_connection_handler.connect()
-    conn = db_connection_handler.get_connection()
 
-    repo = UserRepository(conn)
+    mock_connection = MockConnection()
+
+    repo = UserRepository(mock_connection)
 
     username = "Rodrigo"
-    password = "Takara"
+    password = "Issao"
 
     repo.registry_user(username, password)
 
+    cursor = mock_connection.cursor.return_value
 
-@pytest.mark.skip(reason="Integração com banco de dados")
+    assert "INSERT INTO users" in cursor.execute.call_args[0][0]
+    assert "VALUES" in cursor.execute.call_args[0][0]
+    assert (username, password, 0) == cursor.execute.call_args[0][1]
+
 def test_edit_balance():
 
-    db_connection_handler.connect()
+    mock_connetion = MockConnection()
 
-    conn = db_connection_handler.get_connection()
+    repo = UserRepository(mock_connetion)
 
-    repo = UserRepository(conn)
+    userID = 122
+    balance = 99.95
 
-    id_user = 1
-    balance = 5.95
-    repo.edit_balance(id_user, balance)
+    repo.edit_balance(userID, balance)
 
-@pytest.mark.skip(reason="Integração com banco de dados")
-def test_get_user_by_username():
+    cursor = mock_connetion.cursor.return_value
 
-    db_connection_handler.connect()
+    assert "UPDATE users" in cursor.execute.call_args[0][0]
+    assert "SET balance = ?" in cursor.execute.call_args[0][0]
+    assert "WHERE id = ?" in cursor.execute.call_args[0][0]
+    assert (balance, userID) == cursor.execute.call_args[0][1]
 
-    conn = db_connection_handler.get_connection()
+    mock_connetion.commit.assert_called_once()
 
-    repo = UserRepository(conn)
+def test_get_user_by_name():
+    
+    mock_connection = MockConnection()
+
+    repo = UserRepository(mock_connection)
 
     username = "Rodrigo"
+    repo.get_user_by_username(username)
 
-    user = repo.get_user_by_username(username)
+    cursor = mock_connection.cursor.return_value
 
-    print()
-    print(user)
+    assert "SELECT id, username, password, balance" in cursor.execute.call_args[0][0] 
+    assert "FROM users" in cursor.execute.call_args[0][0] 
+    assert "WHERE username = ?" in cursor.execute.call_args[0][0] 
+
+    cursor.fetchone.assert_called_once()
