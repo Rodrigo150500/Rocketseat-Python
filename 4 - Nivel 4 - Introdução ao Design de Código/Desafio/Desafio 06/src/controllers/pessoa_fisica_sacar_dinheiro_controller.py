@@ -1,10 +1,10 @@
 import re
-from src.models.sqlite.interface.cliente_interface import Cliente
+from src.models.sqlite.interface.cliente_interface import ClienteInterface
 from src.models.sqlite.interface.pessoa_interface import PessoaInterface
 
 class PessoaFisicaSacarDinheiroController:
 
-    def __init__(self, repository: Cliente | PessoaInterface ) -> None:
+    def __init__(self, repository: ClienteInterface | PessoaInterface ) -> None:
         
         self.__repository = repository
 
@@ -16,9 +16,9 @@ class PessoaFisicaSacarDinheiroController:
 
         self.__validar_nome(nome)
 
-        response = self.__repository.sacar_dinheiro(nome, valor)
+        saque = self.__sacar_dinheiro_in_db(nome, valor)
 
-        formatted_response = self.__format_reponse(response)
+        formatted_response = self.__format_reponse(saque)
 
         return formatted_response
 
@@ -31,6 +31,15 @@ class PessoaFisicaSacarDinheiroController:
         if non_valid_caracters.match(nome):
             raise Exception("Caracteres inválidos")
         
+    
+    def __sacar_dinheiro_in_db(self, nome: str, valor:float) -> dict:
+
+        saque = self.__repository.sacar_dinheiro(nome, valor)
+
+        if not saque:
+            raise Exception("Pessoa não encontrada")
+        
+        return saque
 
     def __format_reponse(self, response: str) -> dict:
 

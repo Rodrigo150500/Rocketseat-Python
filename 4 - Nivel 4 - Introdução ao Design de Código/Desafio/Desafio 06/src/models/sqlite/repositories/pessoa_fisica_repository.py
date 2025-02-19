@@ -1,14 +1,11 @@
-from src.models.sqlite.interface.cliente_interface import Cliente
+from src.models.sqlite.interface.cliente_interface import ClienteInterface
 from src.models.sqlite.interface.pessoa_interface import PessoaInterface
 from src.models.sqlite.interface.pessoa_fisica_atributos_interface import PessoaFisicaInterface
 from src.models.sqlite.settings.connection import DBConnectionHandler
 from src.models.sqlite.entities.pessoa_fisica import PessoaFisicaTable
 from sqlalchemy.orm.exc import NoResultFound
 
-
-
-
-class PessoaFisicaRepository(Cliente, PessoaInterface):
+class PessoaFisicaRepository(ClienteInterface, PessoaInterface):
     
     def __init__(self, db_connection: DBConnectionHandler) -> None:
         self.__db_connection = db_connection

@@ -1,5 +1,5 @@
 import re
-from src.models.sqlite.interface.cliente_interface import Cliente
+from src.models.sqlite.interface.cliente_interface import ClienteInterface
 from src.models.sqlite.interface.pessoa_interface import PessoaInterface
 from src.models.sqlite.interface.pessoa_fisica_atributos_interface import PessoaFisicaInterface
 from .interfaces.pessoa_fisica_criar_usuario_controller_interface import PessoaFisicaCriarUsuarioInterface
@@ -7,7 +7,7 @@ from .interfaces.pessoa_fisica_criar_usuario_controller_interface import PessoaF
 
 class PessoaFisicaCriarUsuarioController(PessoaFisicaCriarUsuarioInterface):
 
-    def __init__(self, pessoa_fisica_repository: Cliente | PessoaInterface) -> None:
+    def __init__(self, pessoa_fisica_repository: ClienteInterface | PessoaInterface) -> None:
         self.__pessoa_fisica_repository = pessoa_fisica_repository
         
     def criar(self, person_info: dict) -> dict:

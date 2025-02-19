@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-class Cliente(ABC):
+class ClienteInterface(ABC):
 
     @abstractmethod
     def sacar_dinheiro(self, nome_pessoa: str, valor_sacar: float) -> dict:

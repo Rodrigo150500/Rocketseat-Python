@@ -1,14 +1,14 @@
 from sqlalchemy.orm.exc import NoResultFound
 
 from src.models.sqlite.settings.connection import DBConnectionHandler 
-from src.models.sqlite.interface.cliente_interface import Cliente
+from src.models.sqlite.interface.cliente_interface import ClienteInterface
 from src.models.sqlite.interface.pessoa_interface import PessoaInterface
 from src.models.sqlite.interface.pessoa_juridica_atributos_interface import PessoaJuridicaAtributosInterface
 
 from src.models.sqlite.entities.pessoa_juridica import PessoaJuridicaTable
 
 
-class PessoaJuridicaRepository(Cliente, PessoaInterface):
+class PessoaJuridicaRepository(ClienteInterface, PessoaInterface):
 
     def __init__(self, db_connection: DBConnectionHandler) -> None:
         self.__db_connection = db_connection
