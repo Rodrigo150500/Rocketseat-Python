@@ -17,5 +17,5 @@ def test_consultar_saldo():
     assert isinstance(response, dict)
     assert response['data']['type'] == "Pessoa Fisica"
     assert response['data']['count'] == 1
-    assert response['data']['operation'] == 'consulta saque'
+    assert response['data']['operation'] == 'consulta saldo'
     assert response['data']['response'] == 15

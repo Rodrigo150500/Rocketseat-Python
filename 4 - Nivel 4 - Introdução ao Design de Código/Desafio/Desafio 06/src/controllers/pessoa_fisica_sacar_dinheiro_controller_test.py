@@ -16,7 +16,7 @@ def test_saque():
     controller = PessoaFisicaSacarDinheiroController(mock_repository)
 
     saque_info = {
-        "nome_completo": "Rodrigo Issao",
+        "nome": "Rodrigo Issao",
         "saque": 45.95
     }
 

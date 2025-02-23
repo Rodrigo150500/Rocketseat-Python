@@ -35,6 +35,7 @@ class PessoaJuridicaRepository(ClienteInterface, PessoaInterface):
                 database.session.commit()
 
             return {
+                        "Nome": nome_pessoa_juridica,
                         "Saque": valor_sacar,
                         "Saldo": saldo_remanescente
                     }
@@ -58,12 +59,14 @@ class PessoaJuridicaRepository(ClienteInterface, PessoaInterface):
     def realizar_extrato(self, nome_pessoa_juridica: str) -> dict:
 
         with self.__db_connection as database:
-            user = database.session.query(PessoaJuridicaTable).filter_by(nome_fantasia = nome_pessoa_juridica).first()
+            pessoa = (database.session.query(PessoaJuridicaTable)
+                                        .filter_by(nome_fantasia = nome_pessoa_juridica)
+                                        .first())
 
         extrato = {
-                    "Nome": user.nome_fantasia,
-                    "Saldo": user.saldo,
-                    "Categoria": user.categoria
+                    "Nome": pessoa.nome_fantasia,
+                    "Saldo": pessoa.saldo,
+                    "Categoria": pessoa.categoria
                 }
         return extrato
 

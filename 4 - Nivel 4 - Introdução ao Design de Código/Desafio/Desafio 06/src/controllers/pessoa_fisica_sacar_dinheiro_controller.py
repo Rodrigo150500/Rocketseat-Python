@@ -1,8 +1,9 @@
 import re
 from src.models.sqlite.interface.cliente_interface import ClienteInterface
 from src.models.sqlite.interface.pessoa_interface import PessoaInterface
+from .interfaces.pessoa_fisica_sacar_dinheiro_controller_interface import PessoaFisicaSacarDinheiroInterface
 
-class PessoaFisicaSacarDinheiroController:
+class PessoaFisicaSacarDinheiroController(PessoaFisicaSacarDinheiroInterface):
 
     def __init__(self, repository: ClienteInterface | PessoaInterface ) -> None:
         
@@ -11,7 +12,7 @@ class PessoaFisicaSacarDinheiroController:
     
     def sacar(self, saque_info: dict) -> dict:
 
-        nome = saque_info["nome_completo"]
+        nome = saque_info["nome"]
         valor = saque_info["saque"]
 
         self.__validar_nome(nome)
