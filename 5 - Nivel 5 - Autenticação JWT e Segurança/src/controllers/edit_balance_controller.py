@@ -1,6 +1,7 @@
 from src.models.interfaces.user_repository_interface import UserRepositoryInterface
+from .interfaces.edit_balance_interface import EditBalanceInterface
 
-class EditBalanceController:
+class EditBalanceController(EditBalanceInterface):
 
     def __init__(self, repository: UserRepositoryInterface) -> None:
         self.__repository = repository
