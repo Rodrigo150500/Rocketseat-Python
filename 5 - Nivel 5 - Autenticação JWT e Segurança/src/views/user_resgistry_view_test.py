@@ -25,7 +25,7 @@ def test_handle_registry_user():
     response = view.handle(request)
 
     assert isinstance(response, HttpResponse)
-    assert response.body == {'response': {'alguma': 'coisa'}}
+    assert response.body == {'data': {'alguma': 'coisa'}}
 
 def test_handle_user_registry_with_no_username():
     

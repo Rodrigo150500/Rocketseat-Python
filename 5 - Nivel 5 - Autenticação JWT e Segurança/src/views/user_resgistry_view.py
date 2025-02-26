@@ -20,7 +20,7 @@ class UserResgistryView(ViewInterface):
 
         return HttpResponse(
             body={
-                "response": response
+                "data": response
             }, status_code= 201
         )
 
