@@ -2,7 +2,7 @@ from src.models.interfaces.user_repository_interface import UserRepositoryInterf
 from src.drivers.password_handler import PasswordHandler
 from .interfaces.user_registy_interface import UserRegistryInterface
 
-class UserRegistry(UserRegistryInterface):
+class UserRegistryController(UserRegistryInterface):
     def __init__(self, repository: UserRepositoryInterface) -> None:
         self.__repository = repository
         self.__password_handler = PasswordHandler()
