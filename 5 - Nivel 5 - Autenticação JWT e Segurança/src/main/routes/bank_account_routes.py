@@ -6,6 +6,7 @@ from src.main.composer.login_creator_composer import login_creator_composer
 
 from src.views.http_types.http_request import HttpRequest
 
+from src.main.middlewares.auth_jwt import auth_jwt_verify
 bank_account_bp =Blueprint("bank_account", __name__)
 
 @bank_account_bp.route('/bank/registry', methods= ['POST'])
@@ -25,7 +26,15 @@ def login():
 
 @bank_account_bp.route('/bank/balance/<user_id>', methods=["PATCH"])
 def balance(user_id):
-    http_request = HttpRequest(body=request.json, params={"user_id": user_id})
+
+    token_information = auth_jwt_verify()
+
+    http_request = HttpRequest(
+        body=request.json, 
+        params={"user_id": user_id},
+        token_infos=token_information,
+        headers=request.headers)
+
     http_response = edit_balance_composer().handle(http_request)
 
     return jsonify(http_response.body), http_response.status_code
