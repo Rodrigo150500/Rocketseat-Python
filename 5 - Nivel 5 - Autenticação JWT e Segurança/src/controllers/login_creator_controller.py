@@ -3,7 +3,7 @@ from src.drivers.jwt_handler import JwtHandler
 from src.drivers.password_handler import PasswordHandler
 from .interfaces.login_creator_interface import LoginCreatorInterface
 
-class LoginCreatorController:
+class LoginCreatorController(LoginCreatorInterface):
 
     def __init__(self, repository: UserRepositoryInterface) -> None:
         self.__repository = repository
