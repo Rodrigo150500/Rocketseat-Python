@@ -2,9 +2,9 @@ import re
 from src.models.sqlite.interface.cliente_interface import ClienteInterface
 from src.models.sqlite.interface.pessoa_interface import PessoaInterface
 from src.models.sqlite.interface.pessoa_juridica_atributos_interface import PessoaJuridicaAtributosInterface
+from .interfaces.pessoa_juridica_criar_usuario_interface import PessoaJuridicaCriarUsuarioInterface
 
-
-class PessoaJuridicaCriarUsuario:
+class PessoaJuridicaCriarUsuarioController(PessoaJuridicaCriarUsuarioInterface):
 
     def __init__(self, repository: PessoaInterface | ClienteInterface) -> None:
         self.__repository = repository

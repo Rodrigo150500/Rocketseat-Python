@@ -1,7 +1,7 @@
 from src.models.sqlite.interface.cliente_interface import ClienteInterface
 from src.models.sqlite.interface.pessoa_interface import PessoaInterface
 from src.models.sqlite.entities.pessoa_fisica import PessoaFisicaTable
-from .interfaces.pessoa_fisica_listar_usuarios_controller_test_interface import PessoaFisicaListarUsuariosInterface
+from .interfaces.pessoa_fisica_listar_usuarios_controller_interface import PessoaFisicaListarUsuariosInterface
 
 class PessoaFisicaListarUsuariosController(PessoaFisicaListarUsuariosInterface):
     def __init__(self, repository: ClienteInterface | PessoaInterface) -> None:

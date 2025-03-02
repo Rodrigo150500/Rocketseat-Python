@@ -1,8 +1,9 @@
 from src.models.sqlite.interface.cliente_interface import ClienteInterface
 from src.models.sqlite.interface.pessoa_interface import PessoaInterface
+from .interfaces.pessoa_juridica_consultar_saldo_interface import PessoaJuridicaConsultarSaldoInterface
 
 
-class PessoaJuridicaConsultarSaldoController:
+class PessoaJuridicaConsultarSaldoController(PessoaJuridicaConsultarSaldoInterface):
     def __init__(self, repository: ClienteInterface | PessoaInterface ) -> None:
         self.__repository = repository
 

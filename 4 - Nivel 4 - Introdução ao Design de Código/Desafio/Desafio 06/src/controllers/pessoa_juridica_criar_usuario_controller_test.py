@@ -1,5 +1,5 @@
 from src.models.sqlite.interface.pessoa_juridica_atributos_interface import PessoaJuridicaAtributosInterface
-from .pessoa_juridica_criar_usuario_controller import PessoaJuridicaCriarUsuario
+from .pessoa_juridica_criar_usuario_controller import PessoaJuridicaCriarUsuarioController
 
 class MockPerson:
     def criar_usuario(self, user):
@@ -9,7 +9,7 @@ class MockPerson:
 def test_criar_usuario_PJ():
     mock_repository = MockPerson()
 
-    controller = PessoaJuridicaCriarUsuario(mock_repository)
+    controller = PessoaJuridicaCriarUsuarioController(mock_repository)
 
     user = PessoaJuridicaAtributosInterface(
             faturamento=15900,

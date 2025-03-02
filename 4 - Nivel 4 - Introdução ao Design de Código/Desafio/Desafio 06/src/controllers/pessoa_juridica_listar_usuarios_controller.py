@@ -3,7 +3,7 @@ from src.models.sqlite.interface.pessoa_interface import PessoaInterface
 from src.models.sqlite.entities.pessoa_juridica import PessoaJuridicaTable
 
 
-class PessoaJuridicaListarUsuarios:
+class PessoaJuridicaListarUsuariosController:
     def __init__(self, repository: ClienteInterface | PessoaInterface) -> None:
         self.__repository = repository
 

@@ -1,5 +1,5 @@
 from src.models.sqlite.entities.pessoa_juridica import PessoaJuridicaTable
-from .pessoa_juridica_listar_usuarios_controller import PessoaJuridicaListarUsuarios
+from .pessoa_juridica_listar_usuarios_controller import PessoaJuridicaListarUsuariosController
 
 class MockRepository:
     def listar_usuarios(self) -> list[PessoaJuridicaTable]:
@@ -30,7 +30,7 @@ def test_listar_usuarios_PJ():
 
     mock_repository = MockRepository()
 
-    controller = PessoaJuridicaListarUsuarios(mock_repository)
+    controller = PessoaJuridicaListarUsuariosController(mock_repository)
 
     response = controller.listar_usuarios()
 
