@@ -71,7 +71,8 @@ class PessoaJuridicaRepository(ClienteInterface, PessoaInterface):
         return extrato
 
     def criar_usuario(self, user: PessoaJuridicaAtributosInterface) -> None:
-        user = PessoaJuridicaTable(
+        
+        new_user = PessoaJuridicaTable(
             faturamento = user.faturamento,
             idade = user.idade,
             nome_fantasia = user.nome_fantasia,
@@ -85,7 +86,7 @@ class PessoaJuridicaRepository(ClienteInterface, PessoaInterface):
             
             try:
 
-                database.session.add(user)
+                database.session.add(new_user)
                 database.session.commit()
             
             except Exception as exception:
