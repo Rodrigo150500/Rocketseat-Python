@@ -1,7 +1,7 @@
 import re
 from src.models.sqlite.interface.cliente_interface import ClienteInterface
 from src.models.sqlite.interface.pessoa_interface import PessoaInterface
-from .interfaces.pessoa_fisica_sacar_dinheiro_controller_interface import PessoaFisicaSacarDinheiroInterface
+from .interfaces.pessoa_fisica_sacar_dinheiro_interface import PessoaFisicaSacarDinheiroInterface
 
 class PessoaFisicaSacarDinheiroController(PessoaFisicaSacarDinheiroInterface):
 

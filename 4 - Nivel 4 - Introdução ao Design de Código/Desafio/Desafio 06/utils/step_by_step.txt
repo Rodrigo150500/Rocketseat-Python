@@ -22,3 +22,5 @@
 - Criação dos controllers para regra de negócios (Injeção de Dependencia: repository)
     - Criar os arquivos controllers para cada ação, tipo de pessoa com as interfaces
     - Criar o arquivo para criar usuario
+    - Realizar as interfaces para cada controller
+    

@@ -2,7 +2,7 @@ import re
 from src.models.sqlite.interface.cliente_interface import ClienteInterface
 from src.models.sqlite.interface.pessoa_interface import PessoaInterface
 from src.models.sqlite.interface.pessoa_fisica_atributos_interface import PessoaFisicaInterface
-from .interfaces.pessoa_fisica_criar_usuario_controller_interface import PessoaFisicaCriarUsuarioInterface
+from .interfaces.pessoa_fisica_criar_usuario_interface import PessoaFisicaCriarUsuarioInterface
 
 
 class PessoaFisicaCriarUsuarioController(PessoaFisicaCriarUsuarioInterface):
@@ -10,15 +10,10 @@ class PessoaFisicaCriarUsuarioController(PessoaFisicaCriarUsuarioInterface):
     def __init__(self, pessoa_fisica_repository: ClienteInterface | PessoaInterface) -> None:
         self.__pessoa_fisica_repository = pessoa_fisica_repository
         
-    def criar(self, person_info: dict) -> dict:
+    def criar(self, person_info: PessoaFisicaInterface) -> dict:
 
-        renda_mensal = person_info["renda_mensal"]
-        idade = person_info["idade"]
-        nome_completo = person_info["nome_completo"]
-        celular = person_info["celular"]
-        email = person_info["email"]
-        categoria = person_info["categoria"]
-        saldo = person_info["saldo"]
+        nome_completo = person_info.nome_completo
+        celular = person_info.celular
 
         self.__validate_name(nome_completo)
         self.__validate_celular(celular)
@@ -44,26 +39,16 @@ class PessoaFisicaCriarUsuarioController(PessoaFisicaCriarUsuarioInterface):
         if caracter_non_valid.search(celular):
             raise Exception("Caracteres inválidos")
 
-    def __insert_into_db(self, person_info: dict) -> None:
+    def __insert_into_db(self, person_info: PessoaFisicaInterface) -> None:
 
-        user_data = PessoaFisicaInterface(
-            renda_mensal = person_info["renda_mensal"],
-            idade = person_info["idade"],
-            nome_completo = person_info["nome_completo"],
-            celular = person_info["celular"],
-            email = person_info["email"],
-            categoria = person_info["categoria"],
-            saldo = person_info["saldo"]
-        )
+        self.__pessoa_fisica_repository.criar_usuario(person_info)
 
-        self.__pessoa_fisica_repository.criar_usuario(user_data)
-
-    def __format_response(self, person_info: dict) -> dict:
+    def __format_response(self, person_info: PessoaFisicaInterface) -> dict:
         return {
             "data":{
                 "type": "Pessoa Fisica",
                 "count": 1,
                 "operation": "Criar Usuario",
-                "atributes": person_info
+                "atributes": {"nome": person_info.nome_completo, "idade": person_info.idade}
             }
         }

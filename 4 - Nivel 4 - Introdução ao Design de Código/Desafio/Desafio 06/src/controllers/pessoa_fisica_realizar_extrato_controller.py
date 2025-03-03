@@ -1,6 +1,6 @@
 from src.models.sqlite.interface.pessoa_interface import PessoaInterface
 from src.models.sqlite.interface.cliente_interface import ClienteInterface
-from .interfaces.pessoa_fisica_realizar_extrato_controller_interface import PessoaFisicaRealizarExtratoInterface
+from .interfaces.pessoa_fisica_realizar_extrato_interface import PessoaFisicaRealizarExtratoInterface
 
 class PessoaFisicaRealizarExtratoController(PessoaFisicaRealizarExtratoInterface):
     def __init__(self, repository: PessoaInterface | ClienteInterface) -> None:
