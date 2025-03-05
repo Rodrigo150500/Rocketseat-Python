@@ -9,7 +9,7 @@ class PessoaFisicaCriarUsuarioView(ViewInterface):
     def __init__(self, controller: PessoaFisicaCriarUsuarioInterface) -> None:
         self.__controller = controller
     
-    def handle(self, http_request: HttpRequest, user: PessoaFisicaInterface) -> HttpResponse:
+    def handle(self, http_request: HttpRequest) -> HttpResponse:
 
         new_user = PessoaFisicaInterface(
             nome_completo = http_request.body.get("nome_completo"),
@@ -17,7 +17,7 @@ class PessoaFisicaCriarUsuarioView(ViewInterface):
             categoria = http_request.body.get("categoria"),
             celular = http_request.body.get("celular"),
             email = http_request.body.get("email"),
-            saldo = http_request.bool.get("saldo"),
+            saldo = http_request.body.get("saldo"),
             renda_mensal = http_request.body.get("renda_mensal")
         )
 

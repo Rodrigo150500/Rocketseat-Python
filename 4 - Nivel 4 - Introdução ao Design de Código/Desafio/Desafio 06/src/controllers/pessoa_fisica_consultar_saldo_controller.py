@@ -10,7 +10,7 @@ class PessoaFisicaConsultarSaldoController(PessoaFisicaConsultarSaldoInterface):
 
         saldo = self.__get_saldo(nome_pessoa)
 
-        formatted_response = self.__format_reponse(saldo)
+        formatted_response = self.__format_response(saldo)
 
         return formatted_response
 
@@ -20,7 +20,7 @@ class PessoaFisicaConsultarSaldoController(PessoaFisicaConsultarSaldoInterface):
 
         return saldo
 
-    def __format_reponse(self, saldo: float) -> dict:
+    def __format_response(self, saldo: float) -> dict:
         return {
             "data":{
                 "type":"Pessoa Fisica",
