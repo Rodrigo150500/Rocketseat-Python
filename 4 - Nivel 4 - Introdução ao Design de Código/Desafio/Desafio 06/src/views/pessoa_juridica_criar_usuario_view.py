@@ -12,13 +12,13 @@ class PessoaJuridicaCriarUsuarioView(ViewInterface):
     def handle(self, http_request: HttpRequest) -> HttpResponse:
 
         new_user = PessoaJuridicaAtributosInterface(
-            faturamento= htttp_request.body.get("faturamento"),
-            idade = htttp_request.body.get("idade"),
-            nome_fantasia= htttp_request.body.get("nome_fantasia"),
-            celular = htttp_request.body.get("celular"),
-            email_corporativo= htttp_request.body.get("email_corporativo"),
-            categoria= htttp_request.body.get("categoria"),
-            saldo = htttp_request.body.get("saldo")
+            faturamento= http_request.body.get("faturamento"),
+            idade = http_request.body.get("idade"),
+            nome_fantasia= http_request.body.get("nome_fantasia"),
+            celular = http_request.body.get("celular"),
+            email_corporativo= http_request.body.get("email_corporativo"),
+            categoria= http_request.body.get("categoria"),
+            saldo = http_request.body.get("saldo")
             )
 
         response = self.__controller.criar_usuario(new_user)
