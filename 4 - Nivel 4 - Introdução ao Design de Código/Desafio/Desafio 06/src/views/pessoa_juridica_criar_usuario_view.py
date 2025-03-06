@@ -3,6 +3,7 @@ from .http_types.http_request import HttpRequest
 from .http_types.http_response import HttpResponse
 from src.controllers.interfaces.pessoa_juridica_criar_usuario_interface import PessoaJuridicaCriarUsuarioInterface
 from src.models.sqlite.interface.pessoa_juridica_atributos_interface import PessoaJuridicaAtributosInterface
+from src.validators.pessoa_juridica_criar_usuario_validator import pessoa_juridica_criar_usuario_validator
 
 class PessoaJuridicaCriarUsuarioView(ViewInterface):
 
@@ -11,6 +12,8 @@ class PessoaJuridicaCriarUsuarioView(ViewInterface):
 
     def handle(self, http_request: HttpRequest) -> HttpResponse:
 
+        pessoa_juridica_criar_usuario_validator(http_request)
+        
         new_user = PessoaJuridicaAtributosInterface(
             faturamento= http_request.body.get("faturamento"),
             idade = http_request.body.get("idade"),

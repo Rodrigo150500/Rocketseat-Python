@@ -1,3 +1,4 @@
+import pytest
 from .pessoa_consultar_saldo_validator import pessoa_consultar_saldo_validator
 
 
@@ -13,3 +14,12 @@ def test_consultar_saldo_validator():
     })
 
     pessoa_consultar_saldo_validator(mock_request)
+
+def test_consultar_saldo_validator_error():
+
+    mock_request = MockRequest(body={
+        "nome":154
+    })
+
+    with pytest.raises(Exception):
+        pessoa_consultar_saldo_validator(mock_request)

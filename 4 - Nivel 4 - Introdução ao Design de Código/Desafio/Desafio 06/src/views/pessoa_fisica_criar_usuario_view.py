@@ -3,6 +3,8 @@ from src.controllers.interfaces.pessoa_fisica_criar_usuario_interface import Pes
 from .http_types.http_request import HttpRequest
 from .http_types.http_response import HttpResponse
 from src.models.sqlite.interface.pessoa_fisica_atributos_interface import PessoaFisicaInterface
+from src.validators.pessoa_fisica_criar_usuario_validator import pessoa_fisica_criar_usuario_validator
+
 
 class PessoaFisicaCriarUsuarioView(ViewInterface):
 
@@ -10,6 +12,9 @@ class PessoaFisicaCriarUsuarioView(ViewInterface):
         self.__controller = controller
     
     def handle(self, http_request: HttpRequest) -> HttpResponse:
+
+        pessoa_fisica_criar_usuario_validator(http_request)
+
 
         new_user = PessoaFisicaInterface(
             nome_completo = http_request.body.get("nome_completo"),
