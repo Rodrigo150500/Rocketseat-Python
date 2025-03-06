@@ -1,3 +1,5 @@
 **/venv/
 **/desafio07.db/
 desafio07.db
+**/__pycache__
+.pytest_cache

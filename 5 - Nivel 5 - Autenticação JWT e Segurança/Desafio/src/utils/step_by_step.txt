@@ -8,3 +8,11 @@ Criar a conexão com o banco de dados
     Exportação da classe já instanciada
 Criar banco de dados
     Abrir DBeaver para linkar o banco de dados e criar a tabela
+Criar init
+    Criar arquivo schema.sql e colocar o comando para criar a tabela com os nomes das colunas
+Criar .vscode pasta
+    Criar os settings.json e não mostrar o pycache, pytest_cache
+Criar .gitignore
+    Ignorar arquivos como banco de dados, venv
+Criar repository
+    Incluir ações
