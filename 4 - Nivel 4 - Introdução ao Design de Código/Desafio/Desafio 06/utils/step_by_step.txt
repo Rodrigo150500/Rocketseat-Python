@@ -23,4 +23,15 @@
     - Criar os arquivos controllers para cada ação, tipo de pessoa com as interfaces
     - Criar o arquivo para criar usuario
     - Realizar as interfaces para cada controller
+- Criação das views 
+    - Para cada ação do banco de dados, criar uma view
+    - Fazer a interface da view com o método handle
+- Criação composer
+    - Para cada ação do banco de dados, criar um composer retornando a view
+- Criar as rotas e server
+    - Criar server com flask importando Flask e realizando o app
+    - Criar as rotas com o blueprint e registrando
+- Criar as validações
+    - Criar as validações de cada ação com o pydantic
+- Criar arquivo run.py
     
