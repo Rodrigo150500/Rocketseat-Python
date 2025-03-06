@@ -3,6 +3,8 @@ from src.models.sqlite.interface.cliente_interface import ClienteInterface
 from src.models.sqlite.interface.pessoa_interface import PessoaInterface
 from src.models.sqlite.interface.pessoa_juridica_atributos_interface import PessoaJuridicaAtributosInterface
 from .interfaces.pessoa_juridica_criar_usuario_interface import PessoaJuridicaCriarUsuarioInterface
+from src.errors.errors_types.http_bad_request import HttpBadRequest
+
 
 class PessoaJuridicaCriarUsuarioController(PessoaJuridicaCriarUsuarioInterface):
 
@@ -32,7 +34,7 @@ class PessoaJuridicaCriarUsuarioController(PessoaJuridicaCriarUsuarioInterface):
         caracters_non_valid = re.compile(r"[^a-zA-Z ]")
 
         if caracters_non_valid.search(nome_fantasia):
-            raise Exception("Caracteres inválidos")
+            raise HttpBadRequest("Caracteres inválidos")
 
     
     def __validate_celular(self, celular: str) -> None:
@@ -40,7 +42,7 @@ class PessoaJuridicaCriarUsuarioController(PessoaJuridicaCriarUsuarioInterface):
         caracter_non_valid = re.compile(r"[^1-9-()+ ]")
 
         if caracter_non_valid.search(celular):
-            raise Exception("Caracteres inválidos")
+            raise HttpBadRequest("Caracteres inválidos")
 
     def __format_response(self, person_info: PessoaJuridicaAtributosInterface) -> dict:
         return {

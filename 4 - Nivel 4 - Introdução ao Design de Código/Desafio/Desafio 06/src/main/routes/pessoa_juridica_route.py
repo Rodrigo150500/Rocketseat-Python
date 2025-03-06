@@ -7,6 +7,7 @@ from src.main.composer.pessoa_juridica_listar_usuarios_composer import pessoa_ju
 from src.main.composer.pessoa_juridica_realizar_extrato_composer import pessoa_juridica_realizar_extrato
 from src.main.composer.pessoa_juridica_sacar_dinheiro_composer import pessoa_juridica_sacar_dinheiro_composer
 
+from src.errors.handle_errors import handle_errors
 
 pessoa_juridica_route_bp = Blueprint("pessoa_juridica_route", __name__)
 
@@ -22,11 +23,19 @@ def pj_consultar_saldo():
 @pessoa_juridica_route_bp.route("/pessoa_juridica/criar_usuario", methods=["POST"])
 def pj_criar_usuario():
 
-    http_request = HttpRequest(body = request.json)
+    try:
 
-    http_response = pessoa_juridica_criar_usuarios_composer().handle(http_request)
+        http_request = HttpRequest(body = request.json)
 
-    return jsonify(http_response.body), http_response.status_code
+        http_response = pessoa_juridica_criar_usuarios_composer().handle(http_request)
+
+        return jsonify(http_response.body), http_response.status_code
+    
+    except Exception as exception:
+
+        http_response = handle_errors(exception)
+
+        return jsonify(http_response.body), http_response.status_code
 
 @pessoa_juridica_route_bp.route("/pessoa_juridica/listar_usuarios", methods=["GET"])
 def pj_listar_usuarios():
@@ -40,17 +49,31 @@ def pj_listar_usuarios():
 @pessoa_juridica_route_bp.route("/pessoa_juridica/realizar_extrato", methods = ["GET"])
 def pj_realizar_extrato():
 
-    http_request = HttpRequest(request.json)
+    try:
+        http_request = HttpRequest(request.json)
 
-    http_response = pessoa_juridica_realizar_extrato().handle(http_request)
+        http_response = pessoa_juridica_realizar_extrato().handle(http_request)
 
-    return jsonify(http_response.body), http_response.status_code
+        return jsonify(http_response.body), http_response.status_code
+    
+    except Exception as exception:
+
+        http_response = handle_errors(exception)
+
+        return jsonify(http_response.body), http_response.status_code
 
 @pessoa_juridica_route_bp.route("/pessoa_juridica/sacar_dinheiro", methods = ["PATCH"])
 def pj_sacar_dinheiro():
 
-    http_request = HttpRequest(body = request.json)
+    try:
+        http_request = HttpRequest(body = request.json)
 
-    http_response = pessoa_juridica_sacar_dinheiro_composer().handle(http_request)
+        http_response = pessoa_juridica_sacar_dinheiro_composer().handle(http_request)
 
-    return jsonify(http_response.body), http_response.status_code
+        return jsonify(http_response.body), http_response.status_code
+    
+    except Exception as exception:
+
+        http_response = handle_errors(exception)
+
+        return jsonify(http_response.body), http_response.status_code

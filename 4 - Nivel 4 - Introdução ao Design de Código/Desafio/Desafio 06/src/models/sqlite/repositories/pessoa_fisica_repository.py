@@ -5,6 +5,8 @@ from src.models.sqlite.settings.connection import DBConnectionHandler
 from src.models.sqlite.entities.pessoa_fisica import PessoaFisicaTable
 from sqlalchemy.orm.exc import NoResultFound
 
+from src.errors.errors_types.http_bad_request import HttpBadRequest
+
 class PessoaFisicaRepository(ClienteInterface, PessoaInterface):
     
     def __init__(self, db_connection: DBConnectionHandler) -> None:
@@ -18,7 +20,7 @@ class PessoaFisicaRepository(ClienteInterface, PessoaInterface):
 
         if valor_sacar > limite or valor_sacar > saldo:
             
-            raise Exception("Saque inválido")
+            raise HttpBadRequest("Saque inválido")
         else:
             
             saldo_remanescente = round(saldo - valor_sacar,2)

@@ -7,7 +7,7 @@ from src.models.sqlite.interface.pessoa_juridica_atributos_interface import Pess
 
 from src.models.sqlite.entities.pessoa_juridica import PessoaJuridicaTable
 
-
+from src.errors.errors_types.http_bad_request import HttpBadRequest
 class PessoaJuridicaRepository(ClienteInterface, PessoaInterface):
 
     def __init__(self, db_connection: DBConnectionHandler) -> None:
@@ -19,7 +19,7 @@ class PessoaJuridicaRepository(ClienteInterface, PessoaInterface):
         saldo = self.consultar_saldo(nome_pessoa_juridica)
 
         if saldo <= valor_sacar or valor_sacar >= valor_limite:
-            raise Exception("Saque inválido")
+            raise HttpBadRequest("Saque inválido")
         else:
 
             saldo_remanescente = saldo - round(valor_sacar,2)

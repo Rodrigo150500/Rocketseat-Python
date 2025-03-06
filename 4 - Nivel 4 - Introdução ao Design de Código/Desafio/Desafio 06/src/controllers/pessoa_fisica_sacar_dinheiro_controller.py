@@ -2,6 +2,8 @@ import re
 from src.models.sqlite.interface.cliente_interface import ClienteInterface
 from src.models.sqlite.interface.pessoa_interface import PessoaInterface
 from .interfaces.pessoa_fisica_sacar_dinheiro_interface import PessoaFisicaSacarDinheiroInterface
+from src.errors.errors_types.http_not_found import HttpNotFound
+
 
 class PessoaFisicaSacarDinheiroController(PessoaFisicaSacarDinheiroInterface):
 
@@ -30,7 +32,7 @@ class PessoaFisicaSacarDinheiroController(PessoaFisicaSacarDinheiroInterface):
 
 
         if non_valid_caracters.match(nome):
-            raise Exception("Caracteres inválidos")
+            raise HttpNotFound("Caracteres inválidos")
         
     
     def __sacar_dinheiro_in_db(self, nome: str, valor:float) -> dict:
@@ -38,7 +40,7 @@ class PessoaFisicaSacarDinheiroController(PessoaFisicaSacarDinheiroInterface):
         saque = self.__repository.sacar_dinheiro(nome, valor)
 
         if not saque:
-            raise Exception("Pessoa não encontrada")
+            raise HttpNotFound("Pessoa não encontrada")
         
         return saque
 

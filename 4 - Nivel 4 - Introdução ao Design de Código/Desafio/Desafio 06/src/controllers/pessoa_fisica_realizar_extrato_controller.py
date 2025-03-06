@@ -1,6 +1,8 @@
 from src.models.sqlite.interface.pessoa_interface import PessoaInterface
 from src.models.sqlite.interface.cliente_interface import ClienteInterface
 from .interfaces.pessoa_fisica_realizar_extrato_interface import PessoaFisicaRealizarExtratoInterface
+from src.errors.errors_types.http_not_found import HttpNotFound
+
 
 class PessoaFisicaRealizarExtratoController(PessoaFisicaRealizarExtratoInterface):
     def __init__(self, repository: PessoaInterface | ClienteInterface) -> None:
@@ -20,7 +22,7 @@ class PessoaFisicaRealizarExtratoController(PessoaFisicaRealizarExtratoInterface
         extrato = self.__repository.realizar_extrato(nome_pessoa)
 
         if not extrato:
-            raise Exception("Pessoa não encontrada")
+            raise HttpNotFound("Pessoa não encontrada")
         
         return extrato
 
