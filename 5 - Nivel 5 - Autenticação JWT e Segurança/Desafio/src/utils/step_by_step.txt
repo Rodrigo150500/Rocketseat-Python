@@ -1,3 +1,7 @@
+Visão Geral - Usuário capaz de realizar seu registro, login, após o login:
+Realizar novo pedido, listar seus pedidos
+
+
 Criar database
     Criar arquivo .db na raiz do projeto
 Criar a conexão com o banco de dados
@@ -15,4 +19,4 @@ Criar .vscode pasta
 Criar .gitignore
     Ignorar arquivos como banco de dados, venv
 Criar repository
-    Incluir ações
+    Incluir ações do usuario
