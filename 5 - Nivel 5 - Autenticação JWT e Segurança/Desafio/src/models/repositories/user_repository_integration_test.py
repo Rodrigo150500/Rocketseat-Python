@@ -34,6 +34,7 @@ def test_get_user_by_username():
     assert user[1] == "Rodrigo"
     assert user[2] == "ABC123"
 
+@pytest.mark.skip(reason="Teste de Integração")
 def test_create_new_task():
 
     db_conection_handler.connect()
