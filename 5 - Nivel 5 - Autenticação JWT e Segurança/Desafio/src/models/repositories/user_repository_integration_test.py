@@ -47,5 +47,16 @@ def test_create_new_task():
     task_name = "Limpeza Geral"
     task_detail = "Limpar quartos e salas"
 
-    repo.add_order_by_user_id(user_id, task_name, task_detail)
+    repo.create_new_task(user_id, task_name, task_detail)
 
+def test_list_all_tasks_by_user_id():
+
+    db_conection_handler.connect()
+
+    conn = db_conection_handler.get_connection()
+
+    repo = UserRepository(conn)
+
+    response = repo.list_all_tasks_by_user_id(1)
+
+    print(response)

@@ -20,7 +20,7 @@ class UserRepository(UserRepositoryInterface):
 
         self.__conn.commit()
 
-    def get_user_by_username(self, username: str) -> tuple[int, str, str]:
+    def get_user_by_username(self, username: str) -> list(tuple[int, str, str]):
         cursor = self.__conn.cursor()
 
         cursor.execute(
