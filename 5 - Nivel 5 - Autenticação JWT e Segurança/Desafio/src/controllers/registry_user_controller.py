@@ -1,3 +1,4 @@
+import re
 from src.drivers.password_handler import PasswordHandler
 from src.models.repositories.interfaces.user_repository_interface import UserRepositoryInterface
 from .interfaces.registry_user_interface import RegistryUserInterface
@@ -10,6 +11,8 @@ class RegistryUserController(RegistryUserInterface):
     
     def registry(self, username: str, password: str) -> dict:
 
+        self.__validate_username(username)
+
         self.__verify_if_user_already_exists(username)
 
         hashed_password = self.__encrypt_password(password)
@@ -19,6 +22,14 @@ class RegistryUserController(RegistryUserInterface):
         response = self.__format_response(username)
 
         return response
+
+    def __validate_username(self, username: str) -> None:
+
+        valid_characters = re.compile(r"^[a-zA-Z-09 ]+$")
+
+        if valid_characters.match(username):
+            raise Exception("Caracter Inválido")
+
 
     def __verify_if_user_already_exists(self, username: str) -> None:
         

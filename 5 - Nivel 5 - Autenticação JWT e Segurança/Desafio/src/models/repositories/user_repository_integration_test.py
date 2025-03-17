@@ -49,6 +49,7 @@ def test_create_new_task():
 
     repo.create_new_task(user_id, task_name, task_detail)
 
+@pytest.mark.skip(reason="Teste de Integração")
 def test_list_all_tasks_by_user_id():
 
     db_conection_handler.connect()
