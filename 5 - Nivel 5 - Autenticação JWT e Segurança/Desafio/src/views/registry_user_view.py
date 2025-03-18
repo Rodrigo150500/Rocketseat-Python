@@ -1,10 +1,10 @@
 from src.controllers.interfaces.registry_user_interface import RegistryUserInterface
-from .interfaces.registry_user_interface import RegistryUserInterface
+from .interfaces.view_interface import ViewInterface
 from .http_types.http_request import HttpRequest
 from .http_types.http_response import HttpResponse
 
 
-class RegistryUserView(RegistryUserInterface):
+class RegistryUserView(ViewInterface):
 
     def __init__(self, controller: RegistryUserInterface) -> None:
         self.__controller = controller
@@ -30,9 +30,4 @@ class RegistryUserView(RegistryUserInterface):
             or not isinstance(username, str)
             or not isinstance(password, str)
             ): raise Exception("Invalid Input")
-
-
-
-
-    
 
