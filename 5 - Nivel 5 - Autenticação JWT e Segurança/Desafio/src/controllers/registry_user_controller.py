@@ -3,6 +3,8 @@ from src.drivers.password_handler import PasswordHandler
 from src.models.repositories.interfaces.user_repository_interface import UserRepositoryInterface
 from .interfaces.registry_user_interface import RegistryUserInterface
 
+from src.errors.error_types.http_bad_request import HttpBadRequest
+
 class RegistryUserController(RegistryUserInterface):
     
     def __init__(self, repository: UserRepositoryInterface) -> None:
@@ -28,7 +30,7 @@ class RegistryUserController(RegistryUserInterface):
         valid_characters = re.compile(r"^[a-zA-Z-09 ]+$")
 
         if valid_characters.match(username):
-            raise Exception("Caracter Inválido")
+            raise HttpBadRequest("Caracter Inválido")
 
 
     def __verify_if_user_already_exists(self, username: str) -> None:
@@ -36,7 +38,7 @@ class RegistryUserController(RegistryUserInterface):
         user_exists = self.repository.get_user_by_username(username)
 
         if user_exists:
-            raise Exception("User already exists!")
+            raise HttpBadRequest("User already exists!")
 
     def __encrypt_password(self, password: str) -> str:
         hashed_password = self.password_handler.encrypt_password(password)

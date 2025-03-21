@@ -3,6 +3,8 @@ from src.controllers.interfaces.create_new_task_interface import CreateNewTaskIn
 from .http_types.http_request import HttpRequest
 from .http_types.http_response import HttpResponse
 
+from src.errors.error_types.http_bad_request import HttpBadRequest
+
 class CreateNewTaskView(ViewInterface):
 
     def __init__(self, controller: CreateNewTaskInterface) -> None:
@@ -30,4 +32,4 @@ class CreateNewTaskView(ViewInterface):
             or not task_detail
             or not header_uid
             or user_id != header_uid):
-            raise Exception("Invalid Input")
+            raise HttpBadRequest("Invalid Input")

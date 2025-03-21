@@ -3,6 +3,9 @@ from src.drivers.password_handler import PasswordHandler
 from src.models.repositories.interfaces.user_repository_interface import UserRepositoryInterface
 from .interfaces.login_interface import LoginInterface
 
+from src.errors.error_types.http_not_found import HttpNotFound
+from src.errors.error_types.http_bad_request import HttpBadRequest 
+
 class LoginController(LoginInterface):
     def __init__(self, repository: UserRepositoryInterface) -> None:
         self.jwt_handler = JwtHandler()
@@ -32,7 +35,7 @@ class LoginController(LoginInterface):
         user = self.__repository.get_user_by_username(username)
 
         if not user:
-            raise Exception("Usuário não encontrado")
+            raise HttpNotFound("Usuário não encontrado")
         
         return user
     
@@ -41,7 +44,7 @@ class LoginController(LoginInterface):
         check_password = self.password_hanler.check_password(password, hashed_password) 
 
         if not check_password:
-            raise Exception("Invalid password!")
+            raise HttpBadRequest("Invalid password!")
     
     def __create_token(self, user_id: int) -> str:
 

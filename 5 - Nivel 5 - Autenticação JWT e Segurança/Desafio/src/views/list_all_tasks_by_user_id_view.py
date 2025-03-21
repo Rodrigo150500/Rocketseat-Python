@@ -3,6 +3,8 @@ from .interfaces.view_interface import ViewInterface
 from .http_types.http_request import HttpRequest
 from .http_types.http_response import HttpResponse
 
+from src.errors.error_types.http_bad_request import HttpBadRequest
+
 
 class ListAllTasksByUserIdView(ViewInterface):
 
@@ -24,4 +26,4 @@ class ListAllTasksByUserIdView(ViewInterface):
 
         if (not user_id
             or isinstance(user_id, int)):
-            raise Exception("Invalid Input")
+            raise HttpBadRequest("Invalid Input")
