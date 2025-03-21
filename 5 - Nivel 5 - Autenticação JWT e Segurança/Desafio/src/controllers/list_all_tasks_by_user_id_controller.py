@@ -1,7 +1,8 @@
 from src.models.repositories.user_repository import UserRepository
+from interfaces.list_all_tasks_by_user_id_interface import ListAllTasksByUserIdInterface
 
 
-class ListAllTasksByUserIdController:
+class ListAllTasksByUserIdController(ListAllTasksByUserIdInterface):
 
     def __init__(self, repository: UserRepository) -> None:
         self.__repository = repository
