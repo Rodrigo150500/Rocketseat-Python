@@ -1,5 +1,5 @@
 from src.models.repositories.user_repository import UserRepository
-from interfaces.list_all_tasks_by_user_id_interface import ListAllTasksByUserIdInterface
+from .interfaces.list_all_tasks_by_user_id_interface import ListAllTasksByUserIdInterface
 
 
 class ListAllTasksByUserIdController(ListAllTasksByUserIdInterface):

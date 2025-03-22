@@ -25,8 +25,8 @@ class CreateNewTaskView(ViewInterface):
             "response": response
         }, status_code= 201)
 
-    def __validate_input(self, user_id: int, task_name: str, task_detail: str, header_uid: int):
-        
+    def __validate_input(self, user_id: str, task_name: str, task_detail: str, header_uid: str):
+
         if (not user_id
             or not task_name
             or not task_detail

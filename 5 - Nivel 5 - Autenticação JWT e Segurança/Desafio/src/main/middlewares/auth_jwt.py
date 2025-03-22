@@ -15,8 +15,8 @@ def auth_jwt():
     token = token_raw.split()[1]
     payload = jwt_handler.decode_token(token)
     payload_user_id = payload["user_id"]
-
-    if(payload_user_id) != user_uid:
+    
+    if(payload_user_id) != int(user_uid):
         raise HttpUnauthorized("User unauthorized")
     
     return payload
