@@ -27,9 +27,10 @@ class RegistryUserController(RegistryUserInterface):
 
     def __validate_username(self, username: str) -> None:
 
-        valid_characters = re.compile(r"^[a-zA-Z-09 ]+$")
+        valid_characters = re.compile(r"^[a-zA-Z0-9 ]+$")
 
-        if valid_characters.match(username):
+
+        if not valid_characters.match(username):
             raise HttpBadRequest("Caracter Inválido")
 
 
