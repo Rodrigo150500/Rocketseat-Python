@@ -42,4 +42,90 @@ def test_insert_many_documents():
     ]
 
     order_repository.insert_many_documents(my_doc)
+@pytest.mark.skip(reason="Teste de Integração")
+def test_select_many():
 
+    order_repository = OrderRepository(conn)
+
+    doc_filter = {
+        "cupom": True
+    }
+
+    response = order_repository.select_many(doc_filter)
+
+    print()
+    print(response)
+
+@pytest.mark.skip(reason="Teste de Integração")
+def test_select_one():
+
+    order_repository = OrderRepository(conn)
+
+    doc_filter = {
+        "cupom": True
+    }
+
+    response = order_repository.select_one(doc_filter)
+
+    print()
+    print(response)
+
+@pytest.mark.skip("Teste de Integração")
+def test_select_with_many_properties():
+
+    order_repository = OrderRepository(conn)
+
+    doc_filter = {
+        "cupom": True
+    }
+
+    response = order_repository.select_with_many_properties(doc_filter)
+
+    print(response)
+
+@pytest.mark.skip("Teste de Integração")
+def test_select_if_exists():
+
+    order_repository = OrderRepository(conn)
+
+    response = order_repository.select_if_exists()
+
+    print(response)
+
+@pytest.mark.skip("Teste de Integração")
+def test_select_many_with_multiple_filter():
+
+    order_repository = OrderRepository(conn)
+
+    doc_filter = {
+        "cupom": True,
+        "itens.refrigerante": {"$exists": True}
+    } #Semelhante a uma busca AND em SQL
+
+    response = order_repository.select_many(doc_filter)
+
+    print(response)
+
+@pytest.mark.skip("Teste de Integração")
+def test_select_many_with_or_filter():
+
+    order_repository = OrderRepository(conn)
+
+    doc_filter = {
+        "$or":[
+            {"address": {"$exists": True}},
+            {"itens.pipoca":{"$exists": True}
+            }]
+    } #Semelhante a uma busca OR em SQL
+
+    response = order_repository.select_many(doc_filter)
+
+    print(response)
+
+def test_select_by_object_id():
+
+    order_repository = OrderRepository(conn)
+
+    response = order_repository.select_by_object_id("67ed0783df6150f8f67dbe8f")
+
+    print(response)
