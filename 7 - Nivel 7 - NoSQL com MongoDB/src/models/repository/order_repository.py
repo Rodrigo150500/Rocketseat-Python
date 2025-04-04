@@ -69,3 +69,26 @@ class OrderRepository:
             raise Exception("Nothing found")
 
         return response
+
+    def edit_registry(self) -> None:
+        collection = self.__db_connection.get_collection(self.__collection_name)
+        collection.update_one(
+            {"_id": ObjectId("67e9e8db472d9f9cecc59588")}, #filtro
+            {"$set":{"itens.refrigerante.quantidade": 999}}  #Edição
+        )
+
+    def edit_many_registries(self) -> None:
+        collection = self.__db_connection.get_collection(self.__collection_name)
+        collection.update_many(
+            {"tipo.refrigerante.quantidade": {"$exists": True}}, #filtro
+            {"$set":{"itens.refrigerante.quantidade": 999}}  #Edição
+        )
+
+    def edit_registry_with_increment(self) -> None:
+        collection = self.__db_connection.get_collection(self.__collection_name)
+
+        collection.update_one(
+            {"_id":ObjectId("67e9e8db472d9f9cecc59588")},
+            {"$inc":{"tipo.refrigerante.quantidade": 55}}
+        )
+

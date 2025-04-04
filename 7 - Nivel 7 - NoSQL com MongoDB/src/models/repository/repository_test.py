@@ -122,6 +122,7 @@ def test_select_many_with_or_filter():
 
     print(response)
 
+@pytest.mark.skip("Teste de Integração")
 def test_select_by_object_id():
 
     order_repository = OrderRepository(conn)
@@ -129,3 +130,24 @@ def test_select_by_object_id():
     response = order_repository.select_by_object_id("67ed0783df6150f8f67dbe8f")
 
     print(response)
+@pytest.mark.skip("Teste de Integração")
+def test_edit_selection():
+
+    order_repository = OrderRepository(conn)
+
+    order_repository.edit_registry()
+
+@pytest.mark.skip("Teste de Integração")
+def test_edit_many_registries():
+
+    order_repostory = OrderRepository(conn)
+
+    order_repostory.edit_many_registries()
+
+@pytest.mark.skip("Teste de Integração")
+def test_edit_registry_with_increment():
+
+    order_repostory = OrderRepository(conn)
+
+    order_repostory.edit_registry_with_increment()
+    
