@@ -92,3 +92,16 @@ class OrderRepository:
             {"$inc":{"tipo.refrigerante.quantidade": 55}}
         )
 
+    def delete_registry(self) -> None:
+
+        collection = self.__db_connection.get_collection(self.__collection_name)
+        collection.delete_one(
+            {"_id": ObjectId('67e9e8db472d9f9cecc59588')}
+        )
+
+    def delete_many_registries(self) -> None:
+
+        collection = self.__db_connection.get_collection(self.__collection_name)
+        collection.delete_many(
+            {"cupom": True}
+        )
