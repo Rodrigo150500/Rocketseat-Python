@@ -38,6 +38,20 @@ def test_insert_document():
 
     assert collection.insert_one_attributes['dict'] == doc
 
+def test_select_with_many_properties():
+
+    collection = MockCollection()
+    db_mock_connection = DBMockConnection(collection)
+
+    repo = OrderRepository(db_mock_connection) #type: ignore
+
+    doc = {"testando": "algo"}
+
+    repo.select_with_many_properties(doc)
+
+    assert collection.find_attributes["args"][0] == doc
+    assert collection.find_attributes["args"][1] == {"_id":0, "cupom": 0}
+
     
 
 

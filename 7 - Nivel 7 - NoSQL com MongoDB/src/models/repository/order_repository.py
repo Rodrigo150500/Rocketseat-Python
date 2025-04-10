@@ -1,9 +1,8 @@
-from pymongo.database import Database
 from bson import ObjectId
 
 class OrderRepository:
     
-    def __init__(self, db_connection:Database):
+    def __init__(self, db_connection):
         self.__collection_name = "orders"
         self.__db_connection = db_connection
         
@@ -20,8 +19,6 @@ class OrderRepository:
     def select_many(self, doc_filter: dict) -> list:
         collection = self.__db_connection.get_collection(self.__collection_name)
         response = collection.find(doc_filter)
-
-        response = list(response)
 
         return response
     
@@ -43,7 +40,7 @@ class OrderRepository:
             {"_id":0, "cupom": 0}
         )
 
-        return list(response)
+        return response
     
     def select_if_exists(self) -> list:
 
@@ -56,7 +53,7 @@ class OrderRepository:
             
         )
 
-        return list(response)
+        return response
 
     def select_by_object_id(self, object_id: str) -> dict:
 
