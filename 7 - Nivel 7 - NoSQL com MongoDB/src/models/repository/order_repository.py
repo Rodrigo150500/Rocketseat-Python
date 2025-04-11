@@ -25,9 +25,6 @@ class OrderRepository:
     def select_one(self, doc_filter: dict) -> dict:
         collection = self.__db_connection.get_collection(self.__collection_name)
         response = collection.find_one(doc_filter)
-
-        if not response:
-            raise Exception("Nothing found")
             
         return response
 
@@ -40,8 +37,8 @@ class OrderRepository:
             {"_id":0, "cupom": 0}
         )
 
-        return response
-    
+        return response                         
+
     def select_if_exists(self) -> list:
 
         collection = self.__db_connection.get_collection(self.__collection_name)
@@ -62,8 +59,6 @@ class OrderRepository:
             "_id": ObjectId(object_id)
         })
 
-        if not response:
-            raise Exception("Nothing found")
 
         return response
 
