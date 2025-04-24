@@ -12,9 +12,7 @@ class RegistryOrder:
 
         try:
 
-            body = http_request.body
-
-            new_order = self.__format_new_order(body)
+            new_order = self.__format_new_order(http_request)
 
             self.__registry_order(new_order)
 
@@ -23,8 +21,9 @@ class RegistryOrder:
         except Exception as exception:
 
             return HttpResponse(body={
-                "Error": exception
+                "Error": str(exception)
             }, status_code=400)
+        
     
     def __format_new_order(self, body: dict) -> dict:
 
