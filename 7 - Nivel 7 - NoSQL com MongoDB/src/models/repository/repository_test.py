@@ -5,9 +5,9 @@ from src.models.connections.connection_handler import DBConnectionHanler
 from .order_repository import OrderRepository
 
 
-#db_connection_handler = DBConnectionHanler()
-#db_connection_handler.connection_to_db()
-#conn = db_connection_handler.get_db_connection()
+db_connection_handler = DBConnectionHanler()
+db_connection_handler.connection_to_db()
+conn = db_connection_handler.get_db_connection()
 
 if conn is None:
     raise Exception("Database out of connection")
@@ -158,6 +158,7 @@ def test_delete_registry():
 
     order_repository = OrderRepository(conn)
     order_repository.delete_registry()
+    
 
 @pytest.mark.skip("Teste de Integração")
 def test_delete_many_registries():

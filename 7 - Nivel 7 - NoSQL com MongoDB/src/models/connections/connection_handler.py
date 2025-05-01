@@ -23,3 +23,4 @@ class DBConnectionHanler:
         return self.__db_connection
     
 db_connection_handler = DBConnectionHanler()
+

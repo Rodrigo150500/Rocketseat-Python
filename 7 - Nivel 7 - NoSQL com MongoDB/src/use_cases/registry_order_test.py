@@ -26,7 +26,7 @@ def test_insert_document():
                 "cupom": False,
                 "items":[
                     {"item":"Refrigerante", "quantidade": 2},
-                    {"item": "Pizza", "quantiade": 3}
+                    {"item": "Pizza", "quantidade": 3}
                 ]
             }
         }
@@ -34,12 +34,14 @@ def test_insert_document():
 
     response = use_case.registry(order)
     
-    assert response.body["data"] == {
+    assert response.body == {
+        "data":{
                 "type": "Order",
                 "count":1,
                 "registry": True,
                 "operation": "insert_document"
             }
+        }
     assert response.status_code == 201
     
 def test_with_error():
@@ -56,13 +58,13 @@ def test_with_error():
                 "cupom": False,
                 "items":[
                     {"item":"Refrigerante", "quantidade": 2},
-                    {"item": "Pizza", "quantiade": 3}
+                    {"item": "Pizza", "quantidade": 3}
                 ]
             }
         }
     )
-
+    
     response = use_case.registry(order)
-    assert "Error" in response.body
-    assert str(response.body["Error"]) == "Erro aqui"
-    assert response.status_code == 400
+    assert "errors" in response.body
+    assert str(response.body["errors"][0]["detail"]) == "Erro aqui"
+    assert response.status_code == 500

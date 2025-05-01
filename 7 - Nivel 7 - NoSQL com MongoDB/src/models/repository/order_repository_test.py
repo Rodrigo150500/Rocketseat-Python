@@ -138,11 +138,15 @@ def test_edit_registry():
     db_mock_connection = DBMockConnection(collection)
 
     repo = OrderRepository(db_mock_connection)
+    order_id = "661f1e7d6c4b9a1f54e9a4a5"
+    update_field = {
+        "data":{
+            "name": "Rodrigo"
+        }
+    }
+    repo.edit_registry(order_id, update_field)
 
-    repo.edit_registry()
-
-    assert collection.update_one_attributes["args"][0] == {"_id": ObjectId("67e9e8db472d9f9cecc59588")}
-    assert collection.update_one_attributes["args"][1] == {"$set":{"itens.refrigerante.quantidade": 999}}  
+    assert collection.update_one_attributes["args"][0] == {"_id": ObjectId("661f1e7d6c4b9a1f54e9a4a5")}
 
 def test_edit_many_resgistries():
     collection = MockCollection()

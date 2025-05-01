@@ -7,6 +7,7 @@ class OrderRepository(OrderRepositoryInterface):
         self.__collection_name = "orders"
         self.__db_connection = db_connection
         
+        
     def insert_document(self, document: dict) -> None:
 
         collection = self.__db_connection.get_collection(self.__collection_name)
@@ -63,11 +64,11 @@ class OrderRepository(OrderRepositoryInterface):
 
         return response
 
-    def edit_registry(self) -> None:
+    def edit_registry(self, order_id: str, update_fields: dict) -> None:
         collection = self.__db_connection.get_collection(self.__collection_name)
         collection.update_one(
-            {"_id": ObjectId("67e9e8db472d9f9cecc59588")}, #filtro
-            {"$set":{"itens.refrigerante.quantidade": 999}}  #Edição
+            {"_id": ObjectId(order_id)}, #filtro
+            {"$set":update_fields}  #Edição
         )
 
     def edit_many_registries(self) -> None:

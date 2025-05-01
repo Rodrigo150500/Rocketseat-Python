@@ -3,6 +3,7 @@ from .types.http_unprocessable_entity_error import HttpUnprocessableEntity
 from src.main.http_types.http_response import HttpResponse
 
 
+
 def error_handler(error: Exception):
 
     if isinstance(error, (HttpNotFoundError, HttpUnprocessableEntity)):

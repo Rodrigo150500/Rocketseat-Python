@@ -11,7 +11,6 @@ class RegistryOrder:
         self.__order_repository = order_repository
 
     def registry(self, http_request: HttpRequest) -> HttpResponse:
-
         try:
             body = http_request.body
 
