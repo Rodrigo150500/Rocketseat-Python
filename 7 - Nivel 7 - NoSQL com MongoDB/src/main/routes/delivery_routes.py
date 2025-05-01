@@ -11,6 +11,6 @@ def registry_order():
 
     http_request = HttpRequest(body=request.json)
 
-    response = use_case.registry(http_request.body)
+    response = use_case.registry(http_request)
 
     return jsonify(response.body), response.status_code
