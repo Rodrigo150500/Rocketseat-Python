@@ -28,10 +28,9 @@ class RegistryUpdater:
 
         registry_order_update_validator(body)
 
-    def __update_registry(self, order_id: str, update_fields: dict) -> None:
-
-        self.__order_repository.edit_registry(order_id, update_fields)
-
+    def __update_registry(self, order_id: str, body: dict) -> None:
+        update_field = body["data"]
+        self.__order_repository.edit_registry(order_id, update_field)
 
 
     def __format_response(self, order_id: str) -> HttpResponse:
@@ -44,5 +43,5 @@ class RegistryUpdater:
                     "operation": "update_registry"
                 }
             },
-            status_code= 201
+            status_code= 200
         )
