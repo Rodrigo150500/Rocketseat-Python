@@ -1,4 +1,5 @@
 from cerberus import Validator
+from src.errors.types.http_unprocessable_entity_error import HttpUnprocessableEntity
 
 def registry_order_validator(body: any):
 
@@ -26,4 +27,4 @@ def registry_order_validator(body: any):
     response = body_validator.validate(body)
 
     if response is False:
-        raise Exception(body_validator.errors)
+        raise HttpUnprocessableEntity(body_validator.errors)
