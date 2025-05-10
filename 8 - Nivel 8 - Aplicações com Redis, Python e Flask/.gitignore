@@ -1,0 +1,4 @@
+storage.db
+venv
+**/__pycache
+.pytest_cache
