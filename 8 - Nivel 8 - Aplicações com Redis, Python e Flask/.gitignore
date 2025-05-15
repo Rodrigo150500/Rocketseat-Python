@@ -2,3 +2,4 @@ storage.db
 venv
 **/__pycache
 .pytest_cache
+**/__pytest_cache__
