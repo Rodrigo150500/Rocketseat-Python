@@ -27,7 +27,7 @@ class ProductFinder:
 
     def __search_in_cache(self, product_name: str) -> tuple:
 
-        product_info = self.__repo_redis.get_key(product_name) 
+        product_info = self.__repo_redis.get_key(product_name).decode("utf-8") 
 
         if product_info:
             product_info_list = product_info.split(",") #value,quantity
