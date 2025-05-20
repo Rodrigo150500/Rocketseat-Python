@@ -20,24 +20,26 @@ class ProductFinder:
             product = self.__search_in_sqlite(product_name)
             self.__insert_in_cache(product)
 
-        return HttpResponse(product)
+        return self.__format_response(product)
 
 
 
 
     def __search_in_cache(self, product_name: str) -> tuple:
 
-        product_info = self.__repo_redis.get_key(product_name).decode("utf-8") 
+        product_info = self.__repo_redis.get_key(product_name) 
 
         if product_info:
+            print("cache")
             product_info_list = product_info.split(",") #value,quantity
-            value = product_info_list[1]
-            quantity = product_info_list[2]
+            value = product_info_list[0]
+            quantity = product_info_list[1]
             return (0, product_name, value, quantity)
         
         return None
 
     def __search_in_sqlite(self, product_name: str) -> tuple:
+        print("sqlite")
         product_info = self.__products_repo.find_product_by_name(product_name)
 
         if not product_info:

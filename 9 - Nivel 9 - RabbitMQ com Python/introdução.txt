@@ -1,0 +1,44 @@
+O que é RabbitMQ?
+
+RabbitMQ é um sistema de mensageria (message broker) de código aberto, amplamento utilizado para enviar, receber e rotear entre diferentes serviços ou aplicações. Ela vai servir como meio de comunicação entre sistemas ou aplicações.
+
+Mas isso não parece com HTTP?
+
+Possui 2 diferenças principais, sendo:
+
+No Http a comunicação é direta entre a chamada e o recebimento, então uma API chama outra API diretamente
+
+Enquanto no RabbitMQ ela vai servir como um intermediário entre os serviços
+Por exemplo, o serviço 1 manda uma mensagem para o RabbitMQ e RabbitMQ por sua vez envia solicitações para um ou mais serviços ao invés de enviar um a um.
+
+A 2° diferença está no sincronismo
+
+O Http é uma comunicação sincrona, ou seja, o serviço quando chama uma API ele precisa que a API termine o processo para que continue seu processo.
+
+Já no RabbitMQ é assincrono, o serviço manda mensagem para o RabbitMQ e o serviço continua seu processo independente dos serviços solicitados
+
+Tecnologias similares ao RabbitMQ
+
+- Apache Kafka
+- Amazon SQS (Simple Queue Service)
+- ActiveMQ
+
+AMQP (RabbitMQ) x HTTP (Flask, FastAPI, Django)
+
+Finalidade
+
+RabbitMQ - É um protocolo de mensageria usado para comunicação assíncrono entre sistemas distribuídos.
+
+HTTP = É um protocolo de comunicação síncrono voltado para a transferência de informações entre clientes e servidores na WEB.
+
+Modo Operacional
+
+RabbitMQ - Seu principal objetivo é garantir o envio confiável de mensagens entre produtores e consumidores, mesmo que esses componenetes não estejam disponíveis ao mesmo tempo.
+
+HTTP - Usado principalmente para fazer requisições e receber respostas (ex: APIs Restful), sendo adequado para transações rápidas e com retorno imediato
+
+Cenário
+
+RabbitMQ - É ideal para cenários onde a comunicação precisa ser resiliente e tolerante a falhas, como em filas de mensagens. Assíncrono
+
+HTTP - É ideal para interações que requerem navegação web ou chamadas de API. Síncrono

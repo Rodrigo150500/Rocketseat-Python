@@ -2,4 +2,8 @@
 \2 - Nivel 2/Desafio/mysql/
 \venv
 storage.db
-
+venv
+**/__pycache__
+.pytest_cache
+**/__pytest_cache__
+__pytest_cache__/** 

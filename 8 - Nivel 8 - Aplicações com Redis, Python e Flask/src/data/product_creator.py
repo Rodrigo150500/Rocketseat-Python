@@ -14,6 +14,11 @@ class ProductCreator:
         name = body.get("name")
         price = body.get("price")
         quantity = body.get("quantity")
+
+        self.__insert_in_sqlite(name, price, quantity)
+        self.__insert_in_cache(name, price, quantity)
+
+        return self.__format_response()
     
     def __insert_in_sqlite(self, name: str, price: float, quantity: int) ->None:
         self.__products_repo.insert_product(name, price, quantity)
