@@ -1,0 +1,47 @@
+Comunicação no RabbitMQ
+
+Publisher -> Exchange -> Fila -> Consumer
+
+Publisher: É responsável por enviar a mensagem, será gerada pelo script em python
+
+Exchange: Nessa etapa começa a comunicação do RabbitMQ, exchange é reponsável por receber a mensagem do publisher e encaminhar as filas
+
+Fila: As fila por sua vez recebem a mensagem e gerencia sua entrega para os consumers, nessa etapa já acaba a comunicação do RabbitMQ
+
+Consumer: São as pontas finais da comunicação, farão o consumom da mensagem do publisher, eles também serão feitas em python
+
+Dentro do RabbitMQ precisamos configurar as exchange e as queues (filas), o processo de juntar uma exchange com uma queue é chamada de bind
+
+Uma das opções ao criar uma queue é que podemos atribuir um valor ao campo routing key, basicamente ela serve como um ID específico para dizer ao exchange para quem em específico queremos mandar a mensagem. Por exemplo, colocando uam routing key em uma nova queue chamada minha_queue3 com o valor da routing key de chave1, significa que se ao enviarmos uma mensagem pelo exchange e adicionarmos chave1 ao routing key essa mensagem será recebida apenas pela minha_queue3.
+
+Opções de criação exchange
+
+Ao abrir a aba de exchange podemos configurar os seguintes campos da nossa exchange:
+
+Name: Nome da sua exchange
+Type: 
+    direct: Roteia as mensagens com base na rounting key
+    fanout: ignora as rounting key e envia para todas as vilas que estiverm vínculada
+    headers: Ao invés de usar a rounting key usa os headers como chave para decidir para qual fila enviar
+    topic: Roteia com base em padrões usando o . como separadoe e * ou # com curingas. * apenas um nível e # diversos níveis.
+    x-local-random: Distribui aleatoriamente entre filas locais se houver cluster de nós
+Durability: 
+    durable: Sobrevive a reinicios do servidor
+    transient: É apagada ao reiniciar
+Auto Delete: Se deleta automaticamente ao reiniciar o servidor
+Internal: Se as mensagens virão apenas do exchange do RabbitMQ
+Arguments: Se a exchange não encontrar a fila pode ser redirecionada a exchange. Tem outros argumentos existentes.
+
+Nas criação das queues temos:
+
+Virtual host:
+    /:Namespace dentro do RabbitMQ
+Type:
+    Default for virtual host: Usa o tipo padrão configurado para o vhost normalmente fila clássica
+    Classic: Tipo tradicional, com suporte a durabilidade, TTL, etc.
+    Quorum: Replicam dados entre nós para garantir durabilidade e consistência.
+    Stream: Usado para casos que precisam de alto throughput e streaming de dados.
+Durability: 
+    durable: Sobrevive a reinicios do servidor
+    transient: É apagada ao reiniciar
+Arguments: argumentos se a fila ficar cheia e outros
