@@ -35,4 +35,4 @@ class RabbitMQPublisher:
     )
 
 rabbit_mq_publisher = RabbitMQPublisher()
-rabbit_mq_publisher.send_message({"ola":"mundo"})
+rabbit_mq_publisher.send_message({"msg":"testando meu consumidor"})
