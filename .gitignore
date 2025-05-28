@@ -7,3 +7,4 @@ venv
 .pytest_cache
 **/__pytest_cache__
 __pytest_cache__/** 
+bot_data.txt
